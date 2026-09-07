@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=2 format=3]
+[ext_resource path="res://data/items/item_definition.gd" type="Script" id="1"]
+
+[resource]
+script = ExtResource("1")
+content_id = &"item.key.lucky_acre_deed"
+display_name = "Lucky Acre Deed"
+description = "Congratulations. The farm is yours. So are the obligations printed on page two."
+tags = Array[StringName]([&"key_item", &"lucky_acre", &"vertical_slice"])
+category = "Special"
+max_stack = 1
+buy_value = 0
+sell_value = 0

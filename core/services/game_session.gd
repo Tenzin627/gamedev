@@ -12,23 +12,33 @@ var profile_id: String = "default"
 var session_state: Dictionary = {}
 var creature_instances: Array[Dictionary] = []
 var party_instance_ids: Array[String] = []
+var _fresh_start_pending: bool = true
 
 func _ready() -> void:
     if profile_id.is_empty():
         profile_id = "default"
     if session_state.is_empty():
         session_state = _make_default_session_state()
+        _fresh_start_pending = true
     else:
         _ensure_default_keys()
+        _fresh_start_pending = false
 
 func start_new_session(new_profile_id: String = "default") -> void:
     profile_id = new_profile_id if not new_profile_id.is_empty() else "default"
     session_state = _make_default_session_state()
     creature_instances.clear()
     party_instance_ids.clear()
+    _fresh_start_pending = true
     session_started.emit(profile_id)
     creature_collection_changed.emit()
     party_changed.emit()
+
+func is_fresh_start_pending() -> bool:
+    return _fresh_start_pending
+
+func mark_fresh_start_applied() -> void:
+    _fresh_start_pending = false
 
 func set_value(key: StringName, value: Variant) -> void:
     session_state[String(key)] = value
@@ -114,6 +124,7 @@ func import_state(data: Dictionary) -> void:
                 break
 
     _ensure_default_keys()
+    _fresh_start_pending = false
     session_imported.emit()
     creature_collection_changed.emit()
     party_changed.emit()
@@ -150,7 +161,7 @@ func _migrate_legacy_keys() -> void:
 
 func _make_default_session_state() -> Dictionary:
     return {
-        "currency": 250,
+        "currency": 0,
         "inventory_slots": {},
         "hotbar": {},
         "region_runtime": {},

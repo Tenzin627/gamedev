@@ -1,54 +1,68 @@
 [gd_resource type="Resource" script_class="GameProfileDefinition" load_steps=9 format=3]
 [ext_resource type="Script" path="res://data/profiles/game_profile_definition.gd" id="1"]
 [ext_resource type="Script" path="res://data/profiles/starter_item_entry.gd" id="2"]
+
 [sub_resource type="Resource" id="Hoe"]
 script = ExtResource("2")
 item_id = &"item.tool.field_hoe"
 amount = 1
 hotbar_slot = 0
+
 [sub_resource type="Resource" id="Water"]
 script = ExtResource("2")
 item_id = &"item.tool.watering_can"
 amount = 1
 hotbar_slot = 1
+
 [sub_resource type="Resource" id="Axe"]
 script = ExtResource("2")
 item_id = &"item.tool.field_axe"
 amount = 1
 hotbar_slot = 2
-[sub_resource type="Resource" id="Pickaxe"]
+
+[sub_resource type="Resource" id="Pick"]
 script = ExtResource("2")
 item_id = &"item.tool.field_pickaxe"
 amount = 1
 hotbar_slot = 3
-[sub_resource type="Resource" id="MoonrootSeed"]
+
+[sub_resource type="Resource" id="BellbeanSeed"]
 script = ExtResource("2")
-item_id = &"item.seed.moonroot"
+item_id = &"item.seed.bellbean"
 amount = 3
-hotbar_slot = 4
-[sub_resource type="Resource" id="SunpodSeed"]
+hotbar_slot = -1
+
+[sub_resource type="Resource" id="FieldSnack"]
 script = ExtResource("2")
-item_id = &"item.seed.sunpod"
-amount = 4
-hotbar_slot = 5
-[sub_resource type="Resource" id="FieldPoultice"]
-script = ExtResource("2")
-item_id = &"item.field_poultice"
+item_id = &"item.food.field_snack"
 amount = 2
-hotbar_slot = 6
+hotbar_slot = -1
+
+[sub_resource type="Resource" id="LuckyAcreDeed"]
+script = ExtResource("2")
+item_id = &"item.key.lucky_acre_deed"
+amount = 1
+hotbar_slot = -1
+
 [resource]
 script = ExtResource("1")
 content_id = &"profile.vertical_slice.central_basin"
-display_name = "15-Minute Demo — First Collection"
-description = "A compact fifteen-minute loop: inherit a farm debt, farm and sell, solve one ridiculous creature problem, take an optional wager, and pay the first Ledger collection."
-tags = Array[StringName]([&"profile", &"vertical_slice", &"phase6", &"first_collection"])
+display_name = "Canonical Vertical Slice — September 2026"
+description = "Canonical clean-save profile for the September 2026 Lung Sa vertical slice at Lucky Acre."
+tags = Array[StringName]([&"profile", &"vertical_slice", &"canonical", &"september_2026"])
 start_scene_path = "res://world/central_basin/zones/demo_farm.tscn"
 start_spawn_id = &"default"
+start_spawn_position_override_enabled = true
+start_spawn_position_override = Vector2(-560, -45)
 starter_zone_id = &"zone.central_basin.demo_farm"
-initial_currency = 40
-starter_species_ids = Array[StringName]([&"creature.mossback.baby", &"creature.rillfin.baby"])
-starter_items = Array[StarterItemEntry]([SubResource("Hoe"), SubResource("Water"), SubResource("Axe"), SubResource("Pickaxe"), SubResource("MoonrootSeed"), SubResource("SunpodSeed"), SubResource("FieldPoultice")])
-primary_story_chain_id = &"story_chain.central_basin.first_collection"
+initial_currency = 120
+initial_debt_total = 888888
+initial_payment_gate_target = 5000
+initial_payment_gate_progress = 0
+starter_species_ids = Array[StringName]([])
+starter_items = Array[StarterItemEntry]([SubResource("Hoe"), SubResource("Water"), SubResource("Axe"), SubResource("Pick"), SubResource("BellbeanSeed"), SubResource("FieldSnack"), SubResource("LuckyAcreDeed")])
+initial_quest_id = &"quest.mq00.congratulations_you_owe_us"
+primary_story_chain_id = &""
 welcome_message = ""
 completion_title = ""
 completion_message = ""

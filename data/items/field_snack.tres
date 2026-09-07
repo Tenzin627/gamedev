@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=2 format=3]
+[ext_resource path="res://data/items/item_definition.gd" type="Script" id="1"]
+
+[resource]
+script = ExtResource("1")
+content_id = &"item.food.field_snack"
+display_name = "Field Snack"
+description = "Root mash wrapped in a leaf. Plain, filling and strangely popular."
+tags = Array[StringName]([&"food", &"creature_food", &"vertical_slice"])
+category = "Food"
+max_stack = 99
+buy_value = 0
+sell_value = 0
