@@ -39,7 +39,9 @@ Current checkpoint: **Phase 8 — Unified UI + Character Dialogue Polish**.
 - [ ] Lucky Bowl remains 55% odds / 20 stake / 80 payout / 10 stipend / one play.
 
 ## Runtime
-- [ ] Complete `docs/PLAYTEST.md` in Godot 4.5.x.
+- [ ] Use Godot 4.6.3 for editor and release verification.
+- [ ] `project.godot` still declares the Godot 4.6 feature set.
+- [ ] Complete `docs/PLAYTEST.md` in Godot 4.6.3.
 - [ ] No parser errors or red debugger output.
 - [ ] No HUD overlap at 1280×720.
 - [ ] All modal panels close cleanly and restore focus.
