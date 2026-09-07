@@ -6,9 +6,9 @@
 script = ExtResource("1")
 icon = ExtResource("2_icon")
 content_id = &"item.tool.field_pickaxe"
-display_name = "Field Pickaxe"
-description = "A compact pickaxe for breaking gatherable stone and ore nodes."
-tags = Array[StringName]([&"tool", &"pickaxe", &"gathering"])
+display_name = "Stone Pick"
+description = "Breaks loose stone and small mineral nodes. Large rocks remain management."
+tags = Array[StringName]([&"tool", &"pickaxe", &"stone_pick", &"gathering"])
 category = "Tool"
 max_stack = 1
 buy_value = 160

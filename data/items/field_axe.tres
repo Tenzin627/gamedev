@@ -6,12 +6,12 @@
 script = ExtResource("1")
 icon = ExtResource("2_icon")
 content_id = &"item.tool.field_axe"
-display_name = "Field Axe"
-description = "A dependable hand axe for chopping gatherable wood nodes."
-tags = Array[StringName]([&"tool", &"axe", &"gathering"])
+display_name = "Trail Axe"
+description = "For young trees, branches and thornfall. Not a permit to remove the forest."
+tags = Array[StringName]([&"tool", &"axe", &"trail_axe", &"gathering"])
 category = "Tool"
 max_stack = 1
-buy_value = 140
+buy_value = 160
 sell_value = 0
 tool_tag = &"axe"
 power = 1
