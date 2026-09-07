@@ -6,6 +6,7 @@ extends Node
 const FRESH_START_SCHEMA: int = 1
 
 var _starter_seeded: bool = false
+var _fresh_state_prepared: bool = false
 
 func _ready() -> void:
     if not SceneRouter.location_changed.is_connected(_on_location_changed):
@@ -22,8 +23,9 @@ func _bootstrap_profile() -> void:
         return
 
     var fresh_start: bool = GameSession.is_fresh_start_pending()
-    if fresh_start:
+    if fresh_start and not _fresh_state_prepared:
         _apply_fresh_session_state(profile)
+        _fresh_state_prepared = true
 
     await get_tree().process_frame
 
@@ -35,6 +37,7 @@ func _bootstrap_profile() -> void:
         GameSession.set_value(&"fresh_start.schema", FRESH_START_SCHEMA)
         GameSession.set_value(&"fresh_start.profile_id", String(profile.content_id))
         GameSession.mark_fresh_start_applied()
+        _fresh_state_prepared = false
 
     _claim_pending_rewards()
 
@@ -126,5 +129,6 @@ func restart_demo() -> void:
     WorldStateService.clear_all()
     WorldTimeService.reset_to_default()
     _starter_seeded = false
+    _fresh_state_prepared = false
     SceneRouter.change_scene(profile.start_scene_path, profile.start_spawn_id)
     call_deferred("_bootstrap_profile")
