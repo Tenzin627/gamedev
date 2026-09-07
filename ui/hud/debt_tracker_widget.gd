@@ -28,35 +28,43 @@ func _exit_tree() -> void:
         GameSession.session_state_changed.disconnect(_on_session_state_changed)
 
 func refresh() -> void:
-    var due: int = DebtService.get_current_due()
-    var remaining: int = DebtService.get_remaining_total()
+    var target: int = maxi(DebtService.get_payment_gate_target(), 0)
+    var progress: int = DebtService.get_payment_gate_progress()
+    var remaining_debt: int = DebtService.get_remaining_total()
     var currency: int = int(GameSession.get_value(&"currency", 0))
-    kicker.text = "THE LEDGER  •  COLLECTION 01"
-    funds_bar.max_value = float(DebtService.FIRST_INSTALLMENT)
+    var remaining_gate: int = maxi(target - progress, 0)
+
+    kicker.text = "THE LEDGER  •  PAYMENT GATE I"
+    funds_bar.max_value = float(maxi(target, 1))
+    funds_bar.value = float(progress)
+
     if DebtService.is_first_payment_complete():
-        stamp.text = "PAID"
+        stamp.text = "GATE MET"
         stamp.add_theme_color_override(&"font_color", LungSaUIStyle.COLOR_SUCCESS)
-        amount.text = "500 / 500  STAMPED"
-        funds_bar.value = float(DebtService.FIRST_INSTALLMENT)
+        amount.text = "%s / %s Marks" % [_format_number(progress), _format_number(target)]
+        meta.text = "Outstanding debt  %s Marks" % _format_number(remaining_debt)
         _style_bar(LungSaUIStyle.COLOR_SUCCESS)
-        meta.text = "Outstanding balance  %d" % remaining
         return
 
-    var ready_funds: int = mini(currency, DebtService.FIRST_INSTALLMENT)
-    var shortfall: int = maxi(due - currency, 0)
-    funds_bar.value = float(ready_funds)
-    if shortfall <= 0:
-        stamp.text = "READY"
-        stamp.add_theme_color_override(&"font_color", LungSaUIStyle.COLOR_SUCCESS)
-        amount.text = "%d DUE  •  FUNDS READY" % due
-        meta.text = "Wallet %d  •  Return to the Ledger desk" % currency
-        _style_bar(LungSaUIStyle.COLOR_SUCCESS)
-    else:
-        stamp.text = "OPEN"
-        stamp.add_theme_color_override(&"font_color", LungSaUIStyle.COLOR_LEDGER)
-        amount.text = "%d DUE" % due
-        meta.text = "Wallet %d  •  Short %d" % [currency, shortfall]
-        _style_bar(LungSaUIStyle.COLOR_LEDGER)
+    stamp.text = "OPEN"
+    stamp.add_theme_color_override(&"font_color", LungSaUIStyle.COLOR_LEDGER)
+    amount.text = "%s / %s Marks" % [_format_number(progress), _format_number(target)]
+    meta.text = "Outstanding debt  %s  •  Wallet %s  •  Gate remaining %s" % [
+        _format_number(remaining_debt),
+        _format_number(currency),
+        _format_number(remaining_gate),
+    ]
+    _style_bar(LungSaUIStyle.COLOR_LEDGER)
+
+func _format_number(value: int) -> String:
+    var negative: bool = value < 0
+    var digits: String = str(absi(value))
+    var formatted: String = ""
+    while digits.length() > 3:
+        formatted = "," + digits.substr(digits.length() - 3, 3) + formatted
+        digits = digits.substr(0, digits.length() - 3)
+    formatted = digits + formatted
+    return "-" + formatted if negative else formatted
 
 func _style_bar(accent: Color) -> void:
     funds_bar.add_theme_stylebox_override(&"background", LungSaUIStyle.panel_style(Color("#08120FDD"), Color("#33443B"), 1, 4, 0.0))
