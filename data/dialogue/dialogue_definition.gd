@@ -31,6 +31,24 @@ func validate_definition() -> PackedStringArray:
         if seen.has(node_definition.node_id):
             errors.append("Duplicate dialogue node: %s" % String(node_definition.node_id))
         seen[node_definition.node_id] = true
+        if node_definition.speaker_npc_id != &"" and not ContentDB.get_definition(node_definition.speaker_npc_id) is NPCDefinition:
+            errors.append("Dialogue node %s references missing speaker NPC %s" % [String(node_definition.node_id), String(node_definition.speaker_npc_id)])
+        for condition: ContentCondition in node_definition.conditions:
+            if condition != null:
+                errors.append_array(condition.validate_condition())
+        for action: ContentAction in node_definition.actions:
+            if action != null:
+                errors.append_array(action.validate_action())
+        for choice: DialogueChoice in node_definition.choices:
+            if choice == null:
+                errors.append("Dialogue node %s contains an invalid choice" % String(node_definition.node_id))
+                continue
+            for condition: ContentCondition in choice.conditions:
+                if condition != null:
+                    errors.append_array(condition.validate_condition())
+            for action: ContentAction in choice.actions:
+                if action != null:
+                    errors.append_array(action.validate_action())
     if get_node_definition(start_node_id) == null:
         errors.append("Missing start node: %s" % String(start_node_id))
     return errors

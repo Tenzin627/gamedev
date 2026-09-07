@@ -13,6 +13,7 @@ enum Kind {
     DISCOVER_CONTENT,
     ADD_ITEM,
     REMOVE_ITEM,
+    APPLY_PAYMENT_CREDIT,
 }
 
 @export var kind: Kind = Kind.NONE
@@ -24,7 +25,7 @@ func validate_action() -> PackedStringArray:
     var errors: PackedStringArray = PackedStringArray()
     if kind == Kind.NONE:
         return errors
-    if kind != Kind.ADD_CURRENCY and key == &"":
+    if kind != Kind.ADD_CURRENCY and kind != Kind.APPLY_PAYMENT_CREDIT and key == &"":
         errors.append("Action is missing key/target")
         return errors
     match kind:
@@ -45,4 +46,7 @@ func validate_action() -> PackedStringArray:
                 errors.append("Action references missing item %s" % String(key))
             if amount <= 0:
                 errors.append("Item action amount must be positive")
+        Kind.APPLY_PAYMENT_CREDIT:
+            if amount <= 0:
+                errors.append("Payment-credit action amount must be positive")
     return errors

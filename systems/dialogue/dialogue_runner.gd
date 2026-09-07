@@ -16,10 +16,31 @@ func begin(definition: DialogueDefinition, source_npc_id: StringName, default_sp
     ContentActionExecutor.execute_all(current_node.actions)
     return true
 
+func get_speaker_npc_id() -> StringName:
+    if current_node != null and current_node.speaker_npc_id != &"":
+        return current_node.speaker_npc_id
+    return npc_id
+
 func get_speaker() -> String:
     if current_node == null:
         return speaker_name
-    return current_node.speaker_override if not current_node.speaker_override.is_empty() else speaker_name
+    if not current_node.speaker_override.is_empty():
+        return current_node.speaker_override
+    var speaker_definition: NPCDefinition = ContentDB.get_definition(get_speaker_npc_id()) as NPCDefinition
+    if speaker_definition != null:
+        return speaker_definition.display_name
+    return speaker_name
+
+func get_role() -> String:
+    if current_node != null and not current_node.role_override.is_empty():
+        return current_node.role_override
+    var speaker_definition: NPCDefinition = ContentDB.get_definition(get_speaker_npc_id()) as NPCDefinition
+    if speaker_definition != null and not speaker_definition.role.is_empty():
+        return speaker_definition.role
+    return "Resident"
+
+func should_show_portrait() -> bool:
+    return current_node == null or current_node.show_portrait
 
 func get_text() -> String:
     return current_node.text if current_node != null else ""

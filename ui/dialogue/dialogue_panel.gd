@@ -34,14 +34,13 @@ func _ready() -> void:
     continue_button.pressed.connect(func() -> void: advance_requested.emit())
 
 func open_dialogue(speaker: String, text: String, choices: Array[DialogueChoice], portrait: Texture2D = null, role: String = "Resident") -> void:
-    _portrait = portrait
-    _role = role if not role.is_empty() else "Resident"
-    _refresh_character_context()
     visible = true
-    show_node(speaker, text, choices)
+    show_node(speaker, text, choices, portrait, role)
     panel_state_changed.emit(true)
 
-func show_node(speaker: String, text: String, choices: Array[DialogueChoice]) -> void:
+func show_node(speaker: String, text: String, choices: Array[DialogueChoice], portrait: Texture2D = null, role: String = "Resident") -> void:
+    _portrait = portrait
+    _role = role if not role.is_empty() else "Resident"
     speaker_label.text = speaker
     body_label.text = text
     _refresh_character_context()
@@ -69,7 +68,7 @@ func _refresh_character_context() -> void:
     portrait_texture.texture = _portrait
     portrait_texture.visible = _portrait != null
     role_label.text = _role.to_upper()
-    if _portrait == null:
+    if _portrait == null and _role == "Resident":
         role_label.text = "LUNG SA RESIDENT"
 
 func _unhandled_input(event: InputEvent) -> void:

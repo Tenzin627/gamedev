@@ -36,6 +36,8 @@ static func execute(action: ContentAction) -> void:
             _change_carried_item(action.key, maxi(action.amount, 1))
         ContentAction.Kind.REMOVE_ITEM:
             _change_carried_item(action.key, -maxi(action.amount, 1))
+        ContentAction.Kind.APPLY_PAYMENT_CREDIT:
+            DebtService.apply_payment_credit(maxi(action.amount, 0))
 
 static func _change_carried_item(item_id: StringName, delta: int) -> void:
     if item_id == &"" or delta == 0:

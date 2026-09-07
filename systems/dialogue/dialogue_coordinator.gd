@@ -29,12 +29,15 @@ func start_dialogue(npc_id: StringName, dialogue_id: StringName) -> bool:
         push_warning("DialogueCoordinator: dialogue %s has no available node" % String(dialogue_id))
         return false
     _current_dialogue_id = dialogue_id
-    QuestService.notify_talked_to_npc(npc_id)
-    var portrait: Texture2D = null
-    if npc_definition != null:
-        portrait = npc_definition.portrait_texture if npc_definition.portrait_texture != null else npc_definition.world_texture
-    var role: String = npc_definition.role if npc_definition != null else "Resident"
-    _panel.open_dialogue(_runner.get_speaker(), _runner.get_text(), _runner.get_available_choices(), portrait, role)
+    if npc_id != &"":
+        QuestService.notify_talked_to_npc(npc_id)
+    _panel.open_dialogue(
+        _runner.get_speaker(),
+        _runner.get_text(),
+        _runner.get_available_choices(),
+        _get_current_portrait(),
+        _runner.get_role()
+    )
     dialogue_started.emit(npc_id, dialogue_id)
     return true
 
@@ -114,7 +117,21 @@ func _advance(choice_index: int) -> void:
         _finish_dialogue()
         return
     if _panel != null:
-        _panel.show_node(_runner.get_speaker(), _runner.get_text(), _runner.get_available_choices())
+        _panel.show_node(
+            _runner.get_speaker(),
+            _runner.get_text(),
+            _runner.get_available_choices(),
+            _get_current_portrait(),
+            _runner.get_role()
+        )
+
+func _get_current_portrait() -> Texture2D:
+    if _runner == null or not _runner.should_show_portrait():
+        return null
+    var definition: NPCDefinition = ContentDB.get_definition(_runner.get_speaker_npc_id()) as NPCDefinition
+    if definition == null:
+        return null
+    return definition.portrait_texture if definition.portrait_texture != null else definition.world_texture
 
 func _finish_dialogue() -> void:
     if _runner == null:
