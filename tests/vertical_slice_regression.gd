@@ -15,7 +15,12 @@ func _ready() -> void:
     var farm: FarmPlotSystem = region.get_local_system(&"FarmPlotSystem")
     var farm_visual: FarmPlotVisual = region.get_node("Environment/HomeFarmPlots") as FarmPlotVisual
     var crop: CropDefinition = ContentDB.get_definition(&"crop.moonroot") as CropDefinition
-    var cell: Vector2i = Vector2i(1,1)
+    var owned_cells: Array[Vector2i] = farm.get_owned_cells()
+    check(not owned_cells.is_empty(),"Farm exposes at least one owned starter plot")
+    if owned_cells.is_empty():
+        get_tree().quit(1)
+        return
+    var cell: Vector2i = owned_cells[0]
     check(farm_visual != null,"Farm presentation exists")
     check(farm_visual.get_farm_layers().size()==5,"Farm uses five authoring/runtime TileMapLayer nodes")
     check(farm_visual.farm_owned_plots.get_cell_source_id(cell)==FarmPlotVisual.SOURCE_UNTILLED,"Owned plot is an untilled tile")
