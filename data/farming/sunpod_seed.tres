@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SeedItemDefinition" load_steps=3 format=3]
+[ext_resource path="res://data/farming/seed_item_definition.gd" type="Script" id="1"]
+[ext_resource type="Texture2D" path="res://art/items/farming/sunpod_seeds.svg" id="2_icon"]
+[resource]
+script = ExtResource("1")
+icon = ExtResource("2_icon")
+content_id = &"item.seed.sunpod"
+display_name = "Sunpod Seed"
+description = "A demo-fast seed that matures after one watered night."
+tags = Array[StringName]([&"seed", &"farming", &"central_basin"])
+category = "Seed"
+max_stack = 99
+buy_value = 6
+sell_value = 0
+crop_id = &"crop.sunpod"

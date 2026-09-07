@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BattleStatusDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/battle/effects/battle_status_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"battle_status.weakened"
+display_name = "Weakened"
+description = "Power is reduced while the status lasts."
+tags = Array[StringName]([&"battle_status", &"debuff"])
+default_duration_turns = 2
+power_modifier = -2

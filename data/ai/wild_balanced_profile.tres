@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CreatureAIProfileDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/ai/creature_ai_profile_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"ai_profile.wild.balanced"
+display_name = "Balanced Wild"
+description = "A neutral fallback temperament for wild creatures."
+tags = Array[StringName]([&"wild_ai"])
+move_speed = 42.0
+idle_weight = 1.4
+wander_weight = 2.6
+curiosity_weight = 0.8
+flee_weight = 4.0

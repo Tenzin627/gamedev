@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="FarmWorkProfileDefinition" load_steps=6 format=3]
+[ext_resource type="Script" path="res://data/farming/work/farm_work_profile_definition.gd" id="1"]
+[ext_resource type="Script" path="res://data/farming/work/farm_work_rule.gd" id="2"]
+[sub_resource type="Resource" id="Harvest"]
+script = ExtResource("2")
+kind = 0
+priority = 100
+[sub_resource type="Resource" id="Plant"]
+script = ExtResource("2")
+kind = 2
+priority = 70
+[sub_resource type="Resource" id="Till"]
+script = ExtResource("2")
+kind = 3
+priority = 50
+[resource]
+script = ExtResource("1")
+content_id = &"farm_work.mossback"
+display_name = "Mossback Farm Work"
+description = "Autonomous farm behavior for Mossback forms: harvest mature crops, plant stored seed, then prepare soil."
+tags = Array[StringName]([&"farm_work", &"mossback"])
+rules = Array[FarmWorkRule]([SubResource("Harvest"), SubResource("Plant"), SubResource("Till")])
+work_rate_multiplier = 1.0
+auto_till_cell_limit = 8

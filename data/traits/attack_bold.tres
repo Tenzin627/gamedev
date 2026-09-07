@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="TraitDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/traits/trait_definition.gd" id="1_trait"]
+
+[resource]
+script = ExtResource("1_trait")
+content_id = &"trait.attack.bold"
+display_name = "Bold"
+description = "An Attack archetype trait that favors decisive pressure at the start of an exchange."
+tags = Array[StringName]([&"attack", &"creature_trait"])
+archetype = "Attack"
+trigger = &"battle_start"
+effect_ids = Array[StringName]([&"battle_effect.power.plus2_self"])

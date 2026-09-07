@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="WeatherProfileDefinition" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://data/weather/weather_profile_definition.gd" id="1_profile"]
+[ext_resource type="Script" path="res://data/weather/weather_entry.gd" id="2_entry"]
+
+[sub_resource type="Resource" id="Weather_clear"]
+script = ExtResource("2_entry")
+weather_id = &"clear"
+display_name = "Clear"
+weight = 5.0
+min_duration_game_minutes = 240
+max_duration_game_minutes = 480
+ambience_tag = &"calm"
+
+[sub_resource type="Resource" id="Weather_drizzle"]
+script = ExtResource("2_entry")
+weather_id = &"drizzle"
+display_name = "Soft Drizzle"
+weight = 2.2
+min_duration_game_minutes = 120
+max_duration_game_minutes = 260
+ambience_tag = &"rain"
+
+[sub_resource type="Resource" id="Weather_wind"]
+script = ExtResource("2_entry")
+weather_id = &"wind"
+display_name = "Basin Wind"
+weight = 2.0
+min_duration_game_minutes = 100
+max_duration_game_minutes = 220
+ambience_tag = &"wind"
+
+[sub_resource type="Resource" id="Weather_mist"]
+script = ExtResource("2_entry")
+weather_id = &"mist"
+display_name = "Low Mist"
+weight = 1.4
+min_duration_game_minutes = 90
+max_duration_game_minutes = 180
+ambience_tag = &"mist"
+
+[resource]
+script = ExtResource("1_profile")
+content_id = &"weather_profile.central_basin"
+display_name = "Central Basin Weather"
+description = "Temperate Basin weather profile. Weather is local zone runtime driven by the shared world clock."
+tags = Array[StringName]([&"weather", &"central_basin", &"temperate"])
+default_weather_id = &"clear"
+entries = Array[ResourceDropEntry]([SubResource("Weather_clear"), SubResource("Weather_drizzle"), SubResource("Weather_wind"), SubResource("Weather_mist")])

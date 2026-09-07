@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=3 format=3]
+[ext_resource path="res://data/items/item_definition.gd" type="Script" id="1"]
+[ext_resource type="Texture2D" path="res://art/items/materials/wood.png" id="2_icon"]
+
+[resource]
+script = ExtResource("1")
+icon = ExtResource("2_icon")
+content_id = &"item.material.basin_wood"
+display_name = "Basin Wood"
+description = "Fresh workable timber gathered with an axe."
+tags = Array[StringName]([&"material", &"wood", &"gathering"])
+category = "Material"
+max_stack = 99
+buy_value = 10
+sell_value = 5

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CreatureFoodDefinition" load_steps=3 format=3]
+
+[ext_resource path="res://data/items/creature_food_definition.gd" type="Script" id="1"]
+
+[ext_resource type="Texture2D" path="res://art/items/food/sunseed_cake.png" id="2_icon"]
+
+[resource]
+script = ExtResource("1")
+icon = ExtResource("2_icon")
+content_id = &"item.food.sunseed_cake"
+display_name = "Sunseed Cake"
+description = "A hearty seed cake. Primary creature growth food with an Attack tendency."
+tags = Array[StringName]([&"food", &"creature_food", &"seed"])
+category = "Food"
+max_stack = 20
+buy_value = 16
+sell_value = 6
+growth_xp = 22
+bond_growth = 1
+attack_tendency = 3
+unlock_move_ids = Array[StringName]([&"move.vine_snap"])

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="HabitatDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/habitats/habitat_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"template.habitat"
+display_name = "New Habitat"
+description = "Configure wild creature encounter/spawn rules."
+habitat_tags = Array[StringName]([&"meadow"])
+spawn_entries = Array[ResourceDropEntry]([])
+max_creatures_alive = 4
+initial_creatures = 2
+respawn_delay_seconds = 10.0

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=2 format=3]
+[ext_resource path="res://data/items/item_definition.gd" type="Script" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"item.food.trail_ration"
+display_name = "Trail Ration"
+description = "A compact meal wrapped for long walks between settlements."
+tags = Array[StringName]([&"food", &"consumable", &"travel"])
+category = "Consumable"
+max_stack = 8
+buy_value = 25
+sell_value = 10

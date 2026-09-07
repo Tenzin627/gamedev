@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3]
+[ext_resource type="Script" path="res://world/shared/crafting/crafting_station.gd" id="1"]
+[ext_resource type="Script" path="res://components/interaction/interactable_component.gd" id="2"]
+[ext_resource type="Texture2D" path="res://art/world/props/workbench.png" id="3_workbench"]
+[ext_resource type="Texture2D" path="res://art/world/props/hearth.png" id="4_hearth"]
+[sub_resource type="RectangleShape2D" id="Shape"]
+size = Vector2(86, 62)
+[sub_resource type="RectangleShape2D" id="SolidFootprint"]
+size = Vector2(60,24)
+
+[node name="CraftingStation" type="Node2D"]
+script = ExtResource("1")
+workbench_texture = ExtResource("3_workbench")
+hearth_texture = ExtResource("4_hearth")
+
+[node name="Visual" type="Sprite2D" parent="."]
+position = Vector2(0, -30)
+scale = Vector2(0.2292, 0.2286)
+[node name="Interactable" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 32
+monitoring = false
+monitorable = true
+script = ExtResource("2")
+interaction_priority = 17
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+position = Vector2(0, -14)
+shape = SubResource("Shape")
+
+[node name="SolidFootprint" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 0
+[node name="Shape" type="CollisionShape2D" parent="SolidFootprint"]
+position = Vector2(0,-7)
+shape = SubResource("SolidFootprint")

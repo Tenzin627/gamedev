@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ZoneDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/regions/zone_definition.gd" id="1_zone"]
+
+[resource]
+script = ExtResource("1_zone")
+content_id = &"zone.central_basin.demo_farm"
+display_name = "Home Farm"
+description = "The compact home base for the 15-minute demo: crop plot, storage, creature work space, farmhouse, and the road to Basin Village."
+tags = Array[StringName]([&"zone", &"central_basin", &"demo", &"farm"])
+region_id = &"region.central_basin"
+scene_path = "res://world/central_basin/zones/demo_farm.tscn"
+default_spawn_id = &"default"
+neighbor_zone_ids = Array[StringName]([&"zone.central_basin.demo_village"])
+zone_tags = Array[StringName]([&"farm", &"home", &"safe"])
+weather_profile_id = &"weather_profile.central_basin"

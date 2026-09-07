@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="Script" path="res://world/shared/exploration/discovery_landmark.gd" id="1"]
+[ext_resource type="Script" path="res://components/interaction/interactable_component.gd" id="2"]
+[ext_resource type="Texture2D" path="res://art/world/props/waystone.png" id="3_visual"]
+[sub_resource type="CircleShape2D" id="1"]
+radius = 34.0
+[node name="DiscoveryLandmark" type="Node2D"]
+script = ExtResource("1")
+
+[node name="Visual" type="Sprite2D" parent="."]
+position = Vector2(0, -23.5)
+texture = ExtResource("3_visual")
+scale = Vector2(0.1354, 0.1629)
+modulate = Color(0.725, 0.827, 0.635, 1)
+[node name="Interactable" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("2")
+action_name = &"inspect"
+interaction_priority = 4
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+shape = SubResource("1")

@@ -1,0 +1,373 @@
+[gd_scene load_steps=20 format=3]
+
+[ext_resource type="Script" path="res://ui/hud/core_hud.gd" id="1_core"]
+[ext_resource type="PackedScene" path="res://ui/hud/hotbar_widget.tscn" id="2_hotbar"]
+[ext_resource type="PackedScene" path="res://ui/hud/interaction_prompt_widget.tscn" id="3_prompt"]
+[ext_resource type="PackedScene" path="res://ui/inventory/inventory_panel_widget.tscn" id="4_inventory"]
+[ext_resource type="PackedScene" path="res://ui/shared/tooltip_widget.tscn" id="5_tooltip"]
+[ext_resource type="PackedScene" path="res://ui/shared/confirmation_panel_widget.tscn" id="6_confirm"]
+[ext_resource type="PackedScene" path="res://ui/map/waymark_travel_panel.tscn" id="7_waymark"]
+[ext_resource type="PackedScene" path="res://ui/hud/world_status_widget.tscn" id="8_world_status"]
+[ext_resource type="PackedScene" path="res://ui/creatures/creature_roster_panel.tscn" id="9_roster"]
+[ext_resource type="PackedScene" path="res://ui/creatures/creature_evolution_panel.tscn" id="11_evolution"]
+[ext_resource type="PackedScene" path="res://ui/creatures/creature_loadout_panel.tscn" id="12_loadout"]
+[ext_resource type="PackedScene" path="res://ui/dialogue/dialogue_panel.tscn" id="13_dialogue"]
+[ext_resource type="PackedScene" path="res://ui/quests/quest_journal_panel.tscn" id="14_journal"]
+[ext_resource type="PackedScene" path="res://ui/quests/quest_tracker_widget.tscn" id="15_tracker"]
+[ext_resource type="PackedScene" path="res://ui/shops/shop_panel.tscn" id="17_shop"]
+[ext_resource type="PackedScene" path="res://ui/crafting/crafting_panel.tscn" id="18_crafting"]
+[ext_resource type="PackedScene" path="res://ui/collection/encyclopedia_panel.tscn" id="20_encyclopedia"]
+[ext_resource type="PackedScene" path="res://ui/build/build_menu_panel.tscn" id="21_build_menu"]
+[ext_resource type="PackedScene" path="res://ui/hud/debt_tracker_widget.tscn" id="22_debt"]
+[ext_resource type="PackedScene" path="res://ui/shared/fortune_reveal_panel.tscn" id="23_fortune"]
+
+[node name="CoreHUD" type="CanvasLayer"]
+layer = 10
+script = ExtResource("1_core")
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="WorldStatusWidget" parent="Root" instance=ExtResource("8_world_status")]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 18.0
+offset_right = 378.0
+offset_bottom = 92.0
+
+[node name="QuestTracker" parent="Root" instance=ExtResource("15_tracker")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -388.0
+offset_top = 18.0
+offset_right = -18.0
+offset_bottom = 132.0
+grow_horizontal = 0
+
+[node name="DebtTracker" parent="Root" instance=ExtResource("22_debt")]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 102.0
+offset_right = 378.0
+offset_bottom = 214.0
+
+[node name="ToastPanel" type="PanelContainer" parent="Root"]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 390.0
+offset_top = 18.0
+offset_right = -390.0
+offset_bottom = 76.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="Margin" type="MarginContainer" parent="Root/ToastPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 9
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 9
+
+[node name="Label" type="Label" parent="Root/ToastPanel/Margin"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Status"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MenuHint" type="PanelContainer" parent="Root"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -350.0
+offset_top = -205.0
+offset_right = -18.0
+offset_bottom = -160.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Margin" type="MarginContainer" parent="Root/MenuHint"]
+layout_mode = 2
+theme_override_constants/margin_left = 11
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 11
+theme_override_constants/margin_bottom = 6
+
+[node name="Label" type="Label" parent="Root/MenuHint/Margin"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "[I] Pack   [C] Creatures   [J] Journal   [K] Field Notes   [H] Farm Crew"
+horizontal_alignment = 1
+
+[node name="InteractionPrompt" parent="Root" instance=ExtResource("3_prompt")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -205.0
+offset_top = -218.0
+offset_right = 205.0
+offset_bottom = -166.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HotbarWidget" parent="Root" instance=ExtResource("2_hotbar")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -360.0
+offset_top = -146.0
+offset_right = 360.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ModalShade" type="ColorRect" parent="Root"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+color = Color(0.025, 0.055, 0.045, 0.68)
+
+[node name="InventoryPanel" parent="Root" instance=ExtResource("4_inventory")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -285.0
+offset_right = 360.0
+offset_bottom = 285.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TooltipWidget" parent="Root" instance=ExtResource("5_tooltip")]
+visible = false
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 116.0
+
+[node name="ConfirmationPanel" parent="Root" instance=ExtResource("6_confirm")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FortuneRevealPanel" parent="Root" instance=ExtResource("23_fortune")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WaymarkTravelPanel" parent="Root" instance=ExtResource("7_waymark")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CreatureRosterPanel" parent="Root" instance=ExtResource("9_roster")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -285.0
+offset_right = 350.0
+offset_bottom = 285.0
+grow_horizontal = 2
+grow_vertical = 2
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -270.0
+offset_top = -175.0
+offset_right = 270.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CreatureEvolutionPanel" parent="Root" instance=ExtResource("11_evolution")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -340.0
+offset_top = -270.0
+offset_right = 340.0
+offset_bottom = 270.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CreatureLoadoutPanel" parent="Root" instance=ExtResource("12_loadout")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -390.0
+offset_top = -310.0
+offset_right = 390.0
+offset_bottom = 310.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DialoguePanel" parent="Root" instance=ExtResource("13_dialogue")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="QuestJournalPanel" parent="Root" instance=ExtResource("14_journal")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -430.0
+offset_top = -285.0
+offset_right = 430.0
+offset_bottom = 285.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ShopPanel" parent="Root" instance=ExtResource("17_shop")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -410.0
+offset_top = -285.0
+offset_right = 410.0
+offset_bottom = 285.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CraftingPanel" parent="Root" instance=ExtResource("18_crafting")]
+visible = false
+
+[node name="BuildMenuPanel" parent="Root" instance=ExtResource("21_build_menu")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SliceCompletePanel" type="PanelContainer" parent="Root"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -330.0
+offset_top = -220.0
+offset_right = 330.0
+offset_bottom = 220.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Margin" type="MarginContainer" parent="Root/SliceCompletePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 26
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 26
+
+[node name="VBox" type="VBoxContainer" parent="Root/SliceCompletePanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Kicker" type="Label" parent="Root/SliceCompletePanel/Margin/VBox"]
+layout_mode = 2
+text = "THE LEDGER  •  COLLECTION 01"
+horizontal_alignment = 1
+
+[node name="Stamp" type="Label" parent="Root/SliceCompletePanel/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "STAMPED  •  PAID"
+horizontal_alignment = 1
+
+[node name="Title" type="Label" parent="Root/SliceCompletePanel/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Demo Complete"
+horizontal_alignment = 1
+
+[node name="Body" type="Label" parent="Root/SliceCompletePanel/Margin/VBox"]
+layout_mode = 2
+text = "The current demo objective is complete."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ContinueHint" type="Label" parent="Root/SliceCompletePanel/Margin/VBox"]
+layout_mode = 2
+text = "THE LEDGER ROLLS FORWARD"
+horizontal_alignment = 1
+
+[node name="Restart" type="Button" parent="Root/SliceCompletePanel/Margin/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 46)
+text = "Play Again"
+
+[node name="EncyclopediaPanel" parent="." instance=ExtResource("20_encyclopedia")]
+visible = false

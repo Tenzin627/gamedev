@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://ui/quests/quest_tracker_widget.gd" id="1"]
+[ext_resource type="Theme" path="res://ui/shared/lung_sa_theme.tres" id="2_theme"]
+[node name="QuestTrackerWidget" type="PanelContainer"]
+theme = ExtResource("2_theme")
+custom_minimum_size = Vector2(320, 0)
+mouse_filter = 2
+script = ExtResource("1")
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 11
+[node name="Content" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 3
+[node name="Kicker" type="Label" parent="Margin/Content"]
+layout_mode = 2
+text = "STORY  •  [J] JOURNAL"
+[node name="Title" type="Label" parent="Margin/Content"]
+layout_mode = 2
+text = "Story"
+[node name="Objective" type="Label" parent="Margin/Content"]
+layout_mode = 2
+autowrap_mode = 2
+text = "Current objective"

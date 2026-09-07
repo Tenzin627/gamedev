@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ProgressionMilestoneDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/progression/progression_milestone_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"progression.tamer.bondkeeper"
+display_name = "Bondkeeper"
+description = "A persistent tamer progression milestone earned by playing that part of Lung Sa."
+tags = Array[StringName]([&"progression", &"tamer"])
+track_id = &"tamer"
+rank = 1
+required_points = 25
+unlock_tags = Array[StringName]([&"progression.tamer.basic"])
+reward_currency = 25

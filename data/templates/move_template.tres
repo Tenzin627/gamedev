@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="MoveDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/moves/move_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"template.move"
+display_name = "New Move"
+description = "Describe the move."
+role = "Damage"
+power = 1
+priority = 0
+effect_ids = Array[StringName]([])

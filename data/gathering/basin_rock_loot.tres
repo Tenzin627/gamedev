@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="LootTableDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://data/gathering/loot_table_definition.gd" id="1"]
+[ext_resource type="Script" path="res://data/gathering/resource_drop_entry.gd" id="2"]
+[sub_resource type="Resource" id="Stone"]
+script = ExtResource("2")
+item_id = &"item.material.river_stone"
+min_amount = 2
+max_amount = 4
+[resource]
+script = ExtResource("1")
+content_id = &"loot.central_basin.rock"
+display_name = "Basin Rock Drops"
+description = "Common building stone mined from a Basin outcrop."
+tags = Array[StringName]([&"loot", &"central_basin", &"rock"])
+entries = Array[ResourceDropEntry]([SubResource("Stone")])

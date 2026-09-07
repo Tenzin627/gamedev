@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CreatureEvolutionDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/creatures/creature_evolution_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"evolution.mossback.teen_to_sunhorn"
+display_name = "Sunhorn branch"
+description = "Attack-leaning growth favors a harder striking crown and higher power."
+tags = Array[StringName]([&"creature_evolution"])
+source_species_id = &"creature.mossback.teen"
+source_stage = "teen"
+result_species_id = &"creature.mossback.adult.sunhorn"
+result_stage = "adult"
+min_growth_xp = 90
+min_bond_level = 3
+required_tendency = "Attack"
+minimum_tendency = 6
+branch_label = "Sunhorn branch"
+preview_note = "Attack-leaning growth favors a harder striking crown and higher power."

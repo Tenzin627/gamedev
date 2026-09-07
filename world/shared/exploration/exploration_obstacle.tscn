@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3]
+[ext_resource type="Script" path="res://world/shared/exploration/exploration_obstacle.gd" id="1"]
+[ext_resource type="Script" path="res://components/interaction/interactable_component.gd" id="2"]
+[ext_resource type="Script" path="res://components/gathering/tool_target_component.gd" id="3"]
+[ext_resource type="Texture2D" path="res://art/world/props/thornlog.png" id="4_visual"]
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(90, 38)
+[sub_resource type="CircleShape2D" id="2"]
+radius = 55.0
+[node name="ExplorationObstacle" type="Node2D"]
+script = ExtResource("1")
+
+[node name="Visual" type="Sprite2D" parent="."]
+position = Vector2(0, -6)
+texture = ExtResource("4_visual")
+scale = Vector2(0.3021, 0.2114)
+[node name="Blocker" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 0
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Blocker"]
+shape = SubResource("1")
+[node name="Interactable" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("2")
+action_name = &"use"
+interaction_priority = 6
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+shape = SubResource("2")
+[node name="ToolTarget" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("3")
+tool_target_priority = 8
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ToolTarget"]
+shape = SubResource("2")

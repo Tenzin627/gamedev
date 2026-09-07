@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="QuestDefinition" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://data/quests/quest_definition.gd" id="1"]
+[ext_resource type="Script" path="res://data/quests/quest_objective_definition.gd" id="2"]
+
+[sub_resource type="Resource" id="TalkTavi"]
+script = ExtResource("2")
+objective_id = &"talk_tavi"
+kind = 0
+target_id = &"npc.central_basin.quest_resident"
+required_amount = 1
+description = "Ask Tavi why a creature is holding his paperwork hostage."
+
+[sub_resource type="Resource" id="BondBrambleback"]
+script = ExtResource("2")
+objective_id = &"bond_brambleback"
+kind = 5
+target_id = &"creature.brambleback.baby"
+required_amount = 1
+description = "Bond with a Brambleback in the Basin Wilds."
+
+[sub_resource type="Resource" id="ReturnTavi"]
+script = ExtResource("2")
+objective_id = &"return_tavi"
+kind = 12
+target_id = &"tavi_receipt_resolved"
+required_amount = 1
+description = "Return the Brambleback witness to Tavi."
+
+[resource]
+script = ExtResource("1")
+content_id = &"quest.central_basin.receipt_that_bites_back"
+display_name = "The Receipt That Bites Back"
+description = "Tavi's rent receipt was eaten by a Brambleback. The Ledger accepts the creature itself as a witness, because apparently this has happened before."
+tags = Array[StringName]([&"central_basin", &"main_demo", &"funny"])
+region_id = &"region.central_basin"
+quest_category = "Main"
+quest_chain_id = &"story_chain.central_basin.first_collection"
+chain_order = 0
+consequence_summary = "Tavi gets his paperwork recognized and the player earns enough to make the first debt payment reachable."
+objectives = Array[QuestObjectiveDefinition]([SubResource("TalkTavi"), SubResource("BondBrambleback"), SubResource("ReturnTavi")])
+reward_currency = 425
+auto_complete = true

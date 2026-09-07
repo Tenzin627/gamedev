@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=3 format=3]
+[ext_resource path="res://data/items/item_definition.gd" type="Script" id="1"]
+[ext_resource type="Texture2D" path="res://art/items/materials/plant_fiber.svg" id="2_icon"]
+[resource]
+script = ExtResource("1")
+icon = ExtResource("2_icon")
+content_id = &"item.material.plant_fiber"
+display_name = "Plant Fiber"
+description = "Tough Basin fibers stripped from brush and small branches. Useful, common, and easy to sell."
+tags = Array[StringName]([&"material", &"fiber", &"gathering", &"central_basin"])
+category = "Material"
+max_stack = 99
+buy_value = 6
+sell_value = 3

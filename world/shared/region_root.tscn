@@ -1,0 +1,173 @@
+[gd_scene load_steps=20 format=3]
+
+[ext_resource type="Script" path="res://world/shared/region_root.gd" id="1_root"]
+[ext_resource type="TileSet" path="res://world/shared/region_world_tileset.tres" id="2_tileset"]
+[ext_resource type="PackedScene" path="res://world/shared/spawn_point_2d.tscn" id="3_spawn"]
+[ext_resource type="Script" path="res://world/shared/systems/region_state_controller.gd" id="4_state"]
+[ext_resource type="Script" path="res://world/shared/systems/region_encounter_spawner.gd" id="5_encounter"]
+[ext_resource type="Script" path="res://world/shared/systems/region_ambient_controller.gd" id="6_ambient"]
+[ext_resource type="Script" path="res://world/shared/systems/waymark_travel_coordinator.gd" id="7_waymark"]
+[ext_resource type="Script" path="res://world/shared/presentation/region_atmosphere_presenter.gd" id="8_atmosphere"]
+[ext_resource type="Script" path="res://world/shared/systems/region_player_coordinator.gd" id="10_player"]
+[ext_resource type="Script" path="res://world/shared/systems/wild_battle_coordinator.gd" id="11_battle"]
+[ext_resource type="Script" path="res://world/shared/systems/shop_coordinator.gd" id="12_shop"]
+[ext_resource type="Script" path="res://world/shared/building/building_placement_controller.gd" id="13_building"]
+[ext_resource type="TileSet" path="res://world/shared/tile_content/world_content_tileset.tres" id="15_content_tileset"]
+[ext_resource type="Script" path="res://world/shared/tile_content/tile_world_content_system.gd" id="16_tile_content_system"]
+
+[ext_resource type="Shader" path="res://presentation/water.gdshader" id="14_water"]
+[sub_resource type="ShaderMaterial" id="WaterMaterial"]
+shader = ExtResource("14_water")
+
+[sub_resource type="RectangleShape2D" id="BoundaryTop"]
+size = Vector2(1824, 32)
+[sub_resource type="RectangleShape2D" id="BoundaryBottom"]
+size = Vector2(1824, 32)
+[sub_resource type="RectangleShape2D" id="BoundaryLeft"]
+size = Vector2(32, 1472)
+[sub_resource type="RectangleShape2D" id="BoundaryRight"]
+size = Vector2(32, 1472)
+
+[node name="RegionRoot" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_root")
+
+[node name="TileLayers" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Ground" type="TileMapLayer" parent="TileLayers"]
+tile_set = ExtResource("2_tileset")
+z_index = -20
+
+[node name="GroundDetail" type="TileMapLayer" parent="TileLayers"]
+tile_set = ExtResource("2_tileset")
+z_index = -19
+
+[node name="Paths" type="TileMapLayer" parent="TileLayers"]
+tile_set = ExtResource("2_tileset")
+z_index = -18
+
+[node name="Water" type="TileMapLayer" parent="TileLayers"]
+material = SubResource("WaterMaterial")
+tile_set = ExtResource("2_tileset")
+z_index = -17
+
+[node name="TerrainStructure" type="TileMapLayer" parent="TileLayers"]
+tile_set = ExtResource("2_tileset")
+z_index = -10
+
+[node name="UnderProps" type="TileMapLayer" parent="TileLayers"]
+tile_set = ExtResource("2_tileset")
+z_index = -2
+
+[node name="StaticProps" type="TileMapLayer" parent="TileLayers"]
+tile_set = ExtResource("15_content_tileset")
+z_index = 0
+y_sort_origin = 20
+
+[node name="Forage" type="TileMapLayer" parent="TileLayers"]
+tile_set = ExtResource("15_content_tileset")
+z_index = -1
+
+[node name="ResourceTiles" type="TileMapLayer" parent="TileLayers"]
+tile_set = ExtResource("15_content_tileset")
+z_index = 0
+y_sort_origin = 20
+
+[node name="Overhang" type="TileMapLayer" parent="TileLayers"]
+tile_set = ExtResource("2_tileset")
+z_index = 20
+
+[node name="Canopy" type="TileMapLayer" parent="TileLayers"]
+tile_set = ExtResource("2_tileset")
+z_index = 30
+
+[node name="WorldBoundary" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Top" type="CollisionShape2D" parent="WorldBoundary"]
+position = Vector2(0, -592)
+shape = SubResource("BoundaryTop")
+[node name="Bottom" type="CollisionShape2D" parent="WorldBoundary"]
+position = Vector2(0, 848)
+shape = SubResource("BoundaryBottom")
+[node name="Left" type="CollisionShape2D" parent="WorldBoundary"]
+position = Vector2(-896, 128)
+shape = SubResource("BoundaryLeft")
+[node name="Right" type="CollisionShape2D" parent="WorldBoundary"]
+position = Vector2(896, 128)
+shape = SubResource("BoundaryRight")
+
+[node name="Environment" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Atmosphere" type="CanvasModulate" parent="Environment"]
+script = ExtResource("8_atmosphere")
+
+[node name="WorldObjects" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="NPCs" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Habitats" type="Node2D" parent="."]
+y_sort_enabled = false
+
+[node name="Creatures" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Resources" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Buildings" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Waymarks" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Entrances" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="DefaultSpawn" parent="SpawnPoints" instance=ExtResource("3_spawn")]
+spawn_id = &"default"
+
+[node name="Navigation" type="Node2D" parent="."]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Navigation"]
+
+[node name="AudioZones" type="Node2D" parent="."]
+
+[node name="Systems" type="Node" parent="."]
+
+[node name="RegionStateController" type="Node" parent="Systems"]
+script = ExtResource("4_state")
+
+[node name="EncounterSpawner" type="Node" parent="Systems"]
+script = ExtResource("5_encounter")
+spawning_enabled = false
+
+[node name="AmbientController" type="Node" parent="Systems"]
+script = ExtResource("6_ambient")
+ambience_enabled = true
+weather_enabled = true
+
+[node name="WaymarkTravelCoordinator" type="Node" parent="Systems"]
+script = ExtResource("7_waymark")
+
+[node name="PlayerCoordinator" type="Node" parent="Systems"]
+script = ExtResource("10_player")
+
+[node name="WildBattleCoordinator" type="Node" parent="Systems"]
+script = ExtResource("11_battle")
+
+[node name="ShopCoordinator" type="Node" parent="Systems"]
+script = ExtResource("12_shop")
+
+[node name="BuildingPlacementController" type="Node" parent="Systems"]
+script = ExtResource("13_building")
+
+[node name="TileWorldContentSystem" type="Node" parent="Systems"]
+script = ExtResource("16_tile_content_system")

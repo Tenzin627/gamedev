@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="TraitDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/traits/trait_definition.gd" id="1_trait"]
+
+[resource]
+script = ExtResource("1_trait")
+content_id = &"trait.attack.relentless"
+display_name = "Relentless"
+description = "An Attack archetype trait that favors sustained offensive pressure."
+tags = Array[StringName]([&"attack", &"creature_trait"])
+archetype = "Attack"
+trigger = &"after_attack"
+effect_ids = Array[StringName]([&"battle_effect.heal.1_self"])

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="GatherableResourceDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/gathering/gatherable_resource_definition.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+content_id = &"resource.central_basin.rock"
+display_name = "Basin Rock"
+description = "A dense Basin stone outcrop. Painted on the ResourceTiles layer; pickaxe requirements, durability and drops come from this Resource."
+tags = Array[StringName]([&"resource", &"rock", &"central_basin"])
+accepted_tool_tags = PackedStringArray("pickaxe")
+minimum_tool_tier = 1
+durability = 3
+loot_table_id = &"loot.central_basin.rock"
+respawn_seconds = 24.0

@@ -1,0 +1,106 @@
+[gd_resource type="TileSet" load_steps=12 format=3]
+
+[ext_resource type="Texture2D" path="res://art/tiles/content/moonroot_forage.png" id="1_moonroot"]
+[ext_resource type="Texture2D" path="res://art/tiles/content/basin_tree.png" id="2_tree"]
+[ext_resource type="Texture2D" path="res://art/tiles/content/basin_rock.png" id="3_rock"]
+[ext_resource type="Texture2D" path="res://art/tiles/content/basin_stump.png" id="4_stump"]
+[ext_resource type="Texture2D" path="res://art/tiles/content/basin_rock_broken.png" id="5_broken"]
+
+[sub_resource type="TileSetAtlasSource" id="MoonrootSource"]
+texture = ExtResource("1_moonroot")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/custom_data_0 = "forage"
+0:0/0/custom_data_1 = "plant.central_basin.wild_herb"
+0:0/0/custom_data_2 = "forage.wild_herb.live"
+0:0/0/custom_data_3 = ""
+0:0/0/custom_data_4 = "Collect wild Moonroot"
+0:0/0/custom_data_5 = 30.0
+0:0/0/custom_data_6 = 5
+
+[sub_resource type="TileSetAtlasSource" id="TreeSource"]
+texture = ExtResource("2_tree")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/custom_data_0 = "gatherable"
+0:0/0/custom_data_1 = "resource.central_basin.tree"
+0:0/0/custom_data_2 = "resource.central_basin.tree.live"
+0:0/0/custom_data_3 = "resource.central_basin.tree.depleted"
+0:0/0/custom_data_4 = "Chop Basin Tree"
+0:0/0/custom_data_5 = 42.0
+0:0/0/custom_data_6 = 3
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-14, 8, 14, 8, 14, 30, -14, 30)
+
+[sub_resource type="TileSetAtlasSource" id="RockSource"]
+texture = ExtResource("3_rock")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/custom_data_0 = "gatherable"
+0:0/0/custom_data_1 = "resource.central_basin.rock"
+0:0/0/custom_data_2 = "resource.central_basin.rock.live"
+0:0/0/custom_data_3 = "resource.central_basin.rock.depleted"
+0:0/0/custom_data_4 = "Mine Basin Rock"
+0:0/0/custom_data_5 = 38.0
+0:0/0/custom_data_6 = 3
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-20, 2, 20, 2, 20, 27, -20, 27)
+
+[sub_resource type="TileSetAtlasSource" id="StumpSource"]
+texture = ExtResource("4_stump")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/custom_data_0 = "depleted"
+0:0/0/custom_data_1 = ""
+0:0/0/custom_data_2 = "resource.central_basin.tree.depleted"
+0:0/0/custom_data_3 = ""
+0:0/0/custom_data_4 = ""
+0:0/0/custom_data_5 = 0.0
+0:0/0/custom_data_6 = 0
+
+[sub_resource type="TileSetAtlasSource" id="BrokenRockSource"]
+texture = ExtResource("5_broken")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/custom_data_0 = "depleted"
+0:0/0/custom_data_1 = ""
+0:0/0/custom_data_2 = "resource.central_basin.rock.depleted"
+0:0/0/custom_data_3 = ""
+0:0/0/custom_data_4 = ""
+0:0/0/custom_data_5 = 0.0
+0:0/0/custom_data_6 = 0
+
+[sub_resource type="TileSetAtlasSource" id="DecorTreeSource"]
+texture = ExtResource("2_tree")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/custom_data_0 = "decor"
+0:0/0/custom_data_1 = ""
+0:0/0/custom_data_2 = "decor.central_basin.tree"
+0:0/0/custom_data_3 = ""
+0:0/0/custom_data_4 = ""
+0:0/0/custom_data_5 = 0.0
+0:0/0/custom_data_6 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-12, 10, 12, 10, 12, 30, -12, 30)
+
+[resource]
+tile_size = Vector2i(64, 64)
+custom_data_layer_0/name = "content_kind"
+custom_data_layer_0/type = 4
+custom_data_layer_1/name = "content_id"
+custom_data_layer_1/type = 4
+custom_data_layer_2/name = "tile_key"
+custom_data_layer_2/type = 4
+custom_data_layer_3/name = "depleted_tile_key"
+custom_data_layer_3/type = 4
+custom_data_layer_4/name = "prompt_text"
+custom_data_layer_4/type = 4
+custom_data_layer_5/name = "interaction_radius"
+custom_data_layer_5/type = 3
+custom_data_layer_6/name = "interaction_priority"
+custom_data_layer_6/type = 2
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("MoonrootSource")
+sources/1 = SubResource("TreeSource")
+sources/2 = SubResource("RockSource")
+sources/3 = SubResource("StumpSource")
+sources/4 = SubResource("BrokenRockSource")
+sources/5 = SubResource("DecorTreeSource")

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="DialogueDefinition" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://data/dialogue/dialogue_definition.gd" id="1"]
+[ext_resource type="Script" path="res://data/dialogue/dialogue_node.gd" id="2"]
+
+[sub_resource type="Resource" id="NodeStart"]
+script = ExtResource("2")
+node_id = &"start"
+text = "I heard you won the farm. Congratulations. I also heard the rest of the sentence. Sell what you grow, help Tavi, and remember: Pao's financial advice is only slightly more dangerous than the Ledger's."
+
+[resource]
+script = ExtResource("1")
+content_id = &"dialogue.central_basin.mei_demo"
+display_name = "Mei — Demo Guide"
+description = "Short guidance dialogue for the first collection demo."
+start_node_id = &"start"
+nodes = Array[DialogueNode]([SubResource("NodeStart")])

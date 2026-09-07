@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TraitDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/traits/trait_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"trait.guard.rooted"
+display_name = "Rooted"
+description = "A Guard archetype trait that rewards steady, defensive play."
+tags = Array[StringName]([&"guard", &"creature_trait"])
+archetype = "Guard"
+trigger = &"battle_start"
+effect_ids = Array[StringName]([&"battle_effect.guard.self"])

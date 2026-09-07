@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="StoryChainDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://data/story/story_chain_definition.gd" id="1"]
+[ext_resource type="Script" path="res://data/story/story_step_definition.gd" id="2"]
+[sub_resource type="Resource" id="Step"]
+script = ExtResource("2")
+quest_id = &""
+locked_hint = "Follow the next lead."
+[resource]
+script = ExtResource("1")
+content_id = &"template.story_chain"
+display_name = "New Story Chain"
+description = "Ordered quest chain."
+region_id = &""
+steps = Array[StoryStepDefinition]([SubResource("Step")])
+completion_world_flag = &""
+completion_label = "Story Complete"

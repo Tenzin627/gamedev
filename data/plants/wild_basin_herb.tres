@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PlantDefinition" load_steps=2 format=3]
+[ext_resource path="res://data/plants/plant_definition.gd" type="Script" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"plant.central_basin.wild_herb"
+display_name = "Wild Herb"
+description = "A common collectible herb used to demonstrate quick forage collection in the demo."
+tags = Array[StringName]([&"plant", &"collectible", &"forage", &"central_basin"])
+harvest_item_id = &"item.plant.wild_herb"
+harvest_min = 1
+harvest_max = 2
+region_ids = Array[StringName]([&"region.central_basin"])
+discovery_id = &"discovery.plant.wild_herb"

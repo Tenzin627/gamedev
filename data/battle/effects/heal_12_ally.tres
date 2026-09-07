@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BattleEffectDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/battle/effects/battle_effect_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"battle_effect.heal.12_ally"
+display_name = "Restore 12"
+description = "Restore 12 HP to the selected ally."
+tags = Array[StringName]([&"battle_effect", &"recovery"])
+effect_type = "Heal"
+target_scope = "SelectedAlly"
+amount = 12

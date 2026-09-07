@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="BuildingDefinition" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://data/building/building_definition.gd" id="1"]
+[ext_resource type="Script" path="res://data/building/build_cost_entry.gd" id="2"]
+[ext_resource type="Texture2D" path="res://art/world/buildings/cottage.png" id="3_visual"]
+
+[sub_resource type="Resource" id="CostWood"]
+script = ExtResource("2")
+item_id = &"item.material.basin_wood"
+amount = 6
+
+[sub_resource type="Resource" id="CostStone"]
+script = ExtResource("2")
+item_id = &"item.material.river_stone"
+amount = 3
+
+[resource]
+script = ExtResource("1")
+world_texture = ExtResource("3_visual")
+content_id = &"building.field_shelter"
+display_name = "Field Shelter"
+description = "A compact two-by-two shelter for the homestead."
+menu_category = &"building"
+menu_order = 10
+tags = Array[StringName]([&"building", &"outdoor", &"shelter"])
+footprint_tiles = Vector2i(2, 2)
+costs = Array[BuildCostEntry]([SubResource("CostWood"), SubResource("CostStone")])

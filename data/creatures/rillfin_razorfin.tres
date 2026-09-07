@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="CreatureSpeciesDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://data/creatures/creature_species_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/creatures/rillfin.png" id="2_texture"]
+[ext_resource type="SpriteFrames" path="res://data/creatures/overworld/rillfin_overworld_frames.tres" id="3_frames"]
+[resource]
+script = ExtResource("1")
+world_texture = ExtResource("2_texture")
+world_sprite_frames = ExtResource("3_frames")
+content_id = &"creature.rillfin.adult.razorfin"
+display_name = "Razorfin Rillfin"
+description = "An adult Rillfin shaped by forceful feeding; its fins become compact, sharp and impact-driven."
+tags = Array[StringName]([&"central_basin", &"evolution", &"adult", &"attack_branch"])
+archetype = "Attack"
+life_stage = "Adult"
+base_health = 19
+base_power = 10
+base_bond_chance = 0.48
+habitat_tags = Array[StringName]([&"river", &"riverbank"])
+farm_work_profile_id = &"farm_work.rillfin"
+move_pool_ids = Array[StringName]([&"move.nudge", &"move.vine_snap", &"move.river_dash", &"move.bark_brace"])
+trait_pool_ids = Array[StringName]([&"trait.attack.bold", &"trait.attack.relentless"])
+ai_profile_id = &"ai_profile.wild.attack"

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="FarmWorkProfileDefinition" load_steps=4 format=3]
+[ext_resource type="Script" path="res://data/farming/work/farm_work_profile_definition.gd" id="1"]
+[ext_resource type="Script" path="res://data/farming/work/farm_work_rule.gd" id="2"]
+[sub_resource type="Resource" id="Harvest"]
+script = ExtResource("2")
+kind = 0
+priority = 100
+[sub_resource type="Resource" id="Water"]
+script = ExtResource("2")
+kind = 1
+priority = 80
+[resource]
+script = ExtResource("1")
+content_id = &"template.farm_work"
+display_name = "New Farm Work Profile"
+description = "Choose autonomous jobs and their priority."
+rules = Array[FarmWorkRule]([SubResource("Harvest"), SubResource("Water")])
+work_rate_multiplier = 1.0
+auto_till_cell_limit = 8

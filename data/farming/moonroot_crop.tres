@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CropDefinition" load_steps=2 format=3]
+[ext_resource path="res://data/farming/crop_definition.gd" type="Script" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"crop.moonroot"
+display_name = "Moonroot"
+description = "A dependable basin crop that grows through watered days on the home farm."
+tags = Array[StringName]([&"crop", &"home_farm"])
+seed_item_id = &"item.seed.moonroot"
+harvest_item_id = &"item.plant.moonroot"
+growth_stages = 4
+watered_days_per_stage = 1
+harvest_min = 2
+harvest_max = 4
+regrow_watered_days = 0
+requires_water = true
+farm_stage_source_ids = Array[int]([3, 4, 5, 6])
+farm_ready_source_id = 6

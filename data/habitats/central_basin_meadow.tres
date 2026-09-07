@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="HabitatDefinition" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://data/habitats/habitat_definition.gd" id="1_habitat"]
+[ext_resource type="Script" path="res://data/habitats/habitat_spawn_entry.gd" id="2_entry"]
+
+[sub_resource type="Resource" id="SpawnEntry_mossback"]
+script = ExtResource("2_entry")
+species_id = &"creature.mossback.baby"
+spawn_weight = 1.0
+min_group_size = 1
+max_group_size = 2
+active_time_tags = Array[StringName]([&"dawn", &"day", &"dusk"])
+minimum_ecology_health = 0.25
+
+[resource]
+script = ExtResource("1_habitat")
+content_id = &"habitat.central_basin.meadow"
+display_name = "Central Basin Meadow"
+description = "Open grassland habitat used by grazing creatures around the Basin paths."
+tags = Array[StringName]([&"habitat", &"central_basin", &"meadow"])
+habitat_tags = Array[StringName]([&"meadow", &"grassland"])
+required_region_tags = Array[StringName]([&"grassland"])
+spawn_entries = Array[ResourceDropEntry]([SubResource("SpawnEntry_mossback")])
+max_creatures_alive = 5
+initial_creatures = 2
+respawn_delay_seconds = 10.0
+minimum_player_distance = 125.0
+creature_spacing = 42.0

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BattleRulesetDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/battle/battle_ruleset_definition.gd" id="1_rules"]
+
+[resource]
+script = ExtResource("1_rules")
+content_id = &"battle_rules.standard"
+display_name = "Standard Creature Battle"
+description = "Three-creature party, one active creature per side, turn-based commands, and a one-turn switch cooldown."
+tags = Array[StringName]([&"battle", &"standard"])
+party_size = 3
+active_creatures_per_side = 1
+switch_cooldown_turns = 1
+allow_items = true
+allow_escape = true
+
+archetype_advantage_multiplier = 1.25
+archetype_disadvantage_multiplier = 0.8
+guard_damage_multiplier = 0.65

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BattleConsumableDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/items/battle_consumable_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"item.clearwater_tonic"
+display_name = "Clearwater Tonic"
+description = "A clean herbal tonic that removes current battle status effects."
+tags = Array[StringName]([&"consumable", &"battle_item", &"cleanse"])
+category = "Consumable"
+max_stack = 20
+buy_value = 28
+sell_value = 9
+battle_effect_ids = Array[StringName]([&"battle_effect.cleanse.ally"])
+target_mode = "AnyAlly"
+usable_in_battle = true

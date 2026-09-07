@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MoveDefinition" load_steps=2 format=3]
+
+[ext_resource path="res://data/moves/move_definition.gd" type="Script" id="1"]
+
+[resource]
+script = ExtResource("1")
+content_id = &"move.bark_brace"
+display_name = "Bark Brace"
+description = "A steady defensive stance encouraged by sturdy foods."
+tags = Array[StringName]([&"guard", &"plant"])
+role = "Utility"
+power = 0
+priority = 0
+effect_ids = Array[StringName]([&"battle_effect.guard.self"])

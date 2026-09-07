@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="MoveDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/moves/move_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"move.spore_haze"
+display_name = "Spore Haze"
+description = "A soft cloud that weakens the opponent for two turns."
+tags = Array[StringName]([&"guard", &"plant", &"status"])
+role = "Status"
+power = 0
+priority = 0
+effect_ids = Array[StringName]([&"battle_effect.status.weakened"])

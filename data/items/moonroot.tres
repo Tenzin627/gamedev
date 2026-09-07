@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=3 format=3]
+[ext_resource path="res://data/items/item_definition.gd" type="Script" id="1"]
+[ext_resource type="Texture2D" path="res://art/items/plants/moonroot.png" id="2_icon"]
+
+[resource]
+script = ExtResource("1")
+icon = ExtResource("2_icon")
+content_id = &"item.plant.moonroot"
+display_name = "Moonroot"
+description = "A pale aromatic root gathered around shaded Basin soil; useful as a food and crafting ingredient."
+tags = Array[StringName]([&"plant", &"food_ingredient", &"central_basin"])
+category = "Food"
+max_stack = 99
+buy_value = 16
+sell_value = 8

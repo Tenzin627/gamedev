@@ -1,0 +1,157 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://ui/battle/battle_hud.gd" id="1_hud"]
+[ext_resource type="PackedScene" path="res://ui/battle/battle_creature_status_widget.tscn" id="2_status"]
+[ext_resource type="PackedScene" path="res://ui/battle/battle_party_strip_widget.tscn" id="3_party"]
+[ext_resource type="PackedScene" path="res://ui/battle/battle_command_menu.tscn" id="4_commands"]
+[ext_resource type="PackedScene" path="res://ui/battle/battle_action_picker.tscn" id="5_picker"]
+[ext_resource type="PackedScene" path="res://ui/creatures/bond_encounter_panel.tscn" id="6_bond"]
+
+[node name="BattleHUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_hud")
+
+[node name="OpponentStatus" parent="." instance=ExtResource("2_status")]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 24.0
+offset_right = 442.0
+offset_bottom = 166.0
+side_label = "WILD"
+
+[node name="OpponentParty" parent="." instance=ExtResource("3_party")]
+layout_mode = 0
+offset_left = 846.0
+offset_top = 24.0
+offset_right = 1250.0
+offset_bottom = 96.0
+
+[node name="EncounterHeader" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 458.0
+offset_top = 24.0
+offset_right = 830.0
+offset_bottom = 102.0
+
+[node name="Margin" type="MarginContainer" parent="EncounterHeader"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 8
+
+[node name="VBox" type="VBoxContainer" parent="EncounterHeader/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Encounter" type="Label" parent="EncounterHeader/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "WILD ENCOUNTER"
+horizontal_alignment = 1
+
+[node name="Phase" type="Label" parent="EncounterHeader/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "ROUND 1 • YOUR TURN"
+horizontal_alignment = 1
+
+[node name="RuleHint" type="Label" parent="EncounterHeader/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "ATTACK > SPEED > GUARD > ATTACK"
+horizontal_alignment = 1
+
+
+[node name="MatchupPanel" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 458.0
+offset_top = 112.0
+offset_right = 830.0
+offset_bottom = 152.0
+
+[node name="Margin" type="MarginContainer" parent="MatchupPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 7
+
+[node name="Matchup" type="Label" parent="MatchupPanel/Margin"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "GUARD > ATTACK • YOUR ADVANTAGE"
+horizontal_alignment = 1
+
+[node name="PlayerParty" parent="." instance=ExtResource("3_party")]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 466.0
+offset_right = 432.0
+offset_bottom = 538.0
+
+[node name="PlayerStatus" parent="." instance=ExtResource("2_status")]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 548.0
+offset_right = 442.0
+offset_bottom = 690.0
+side_label = "YOUR ACTIVE"
+
+[node name="CombatFeed" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 570.0
+offset_right = 704.0
+offset_bottom = 690.0
+
+[node name="Margin" type="MarginContainer" parent="CombatFeed"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 9
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 9
+
+[node name="VBox" type="VBoxContainer" parent="CombatFeed/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Title" type="Label" parent="CombatFeed/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "BATTLE LOG"
+
+[node name="Message" type="Label" parent="CombatFeed/Margin/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 12
+autowrap_mode = 2
+text = "Choose an action."
+vertical_alignment = 1
+
+[node name="CommandMenu" parent="." instance=ExtResource("4_commands")]
+layout_mode = 0
+offset_left = 720.0
+offset_top = 422.0
+offset_right = 1252.0
+offset_bottom = 690.0
+
+[node name="ActionPicker" parent="." instance=ExtResource("5_picker")]
+layout_mode = 0
+offset_left = 704.0
+offset_top = 398.0
+offset_right = 1252.0
+offset_bottom = 690.0
+
+[node name="BondEncounterPanel" parent="." instance=ExtResource("6_bond")]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 190.0
+offset_right = 904.0
+offset_bottom = 520.0

@@ -1,0 +1,46 @@
+[gd_resource type="SpriteFrames" load_steps=2 format=3]
+
+[ext_resource type="Texture2D" path="res://art/creatures/mossback.png" id="1_texture"]
+
+[resource]
+animations = [{
+"frames": [{"duration": 1.0, "texture": ExtResource("1_texture")}],
+"loop": true,
+"name": &"idle_n",
+"speed": 4.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("1_texture")}],
+"loop": true,
+"name": &"idle_e",
+"speed": 4.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("1_texture")}],
+"loop": true,
+"name": &"idle_s",
+"speed": 4.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("1_texture")}],
+"loop": true,
+"name": &"idle_w",
+"speed": 4.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("1_texture")}],
+"loop": true,
+"name": &"walk_n",
+"speed": 7.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("1_texture")}],
+"loop": true,
+"name": &"walk_e",
+"speed": 7.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("1_texture")}],
+"loop": true,
+"name": &"walk_s",
+"speed": 7.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("1_texture")}],
+"loop": true,
+"name": &"walk_w",
+"speed": 7.0
+}]

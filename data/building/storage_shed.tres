@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BuildingDefinition" load_steps=5 format=3]
+[ext_resource type="Script" path="res://data/building/building_definition.gd" id="1"]
+[ext_resource type="Script" path="res://data/building/build_cost_entry.gd" id="2"]
+[ext_resource type="Texture2D" path="res://art/world/props/storage_chest.png" id="3_visual"]
+[sub_resource type="Resource" id="Wood"]
+script = ExtResource("2")
+item_id = &"item.material.basin_wood"
+amount = 8
+[resource]
+script = ExtResource("1")
+world_texture = ExtResource("3_visual")
+content_id = &"building.storage_shed"
+display_name = "Storage Shed"
+description = "A homestead storage structure prepared for shared container integration."
+menu_category = &"building"
+menu_order = 20
+tags = Array[StringName]([&"building", &"homestead", &"storage"])
+footprint_tiles = Vector2i(2, 1)
+costs = Array[BuildCostEntry]([SubResource("Wood")])

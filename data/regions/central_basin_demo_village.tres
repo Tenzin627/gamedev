@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ZoneDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/regions/zone_definition.gd" id="1_zone"]
+
+[resource]
+script = ExtResource("1_zone")
+content_id = &"zone.central_basin.demo_village"
+display_name = "Basin Village"
+description = "The compact social hub linking the home farm and the Wilds, with Mei, the Ledger clerk, a shopkeeper, and a quest resident."
+tags = Array[StringName]([&"zone", &"central_basin", &"demo", &"village"])
+region_id = &"region.central_basin"
+scene_path = "res://world/central_basin/zones/demo_village.tscn"
+default_spawn_id = &"default"
+neighbor_zone_ids = Array[StringName]([&"zone.central_basin.demo_farm", &"zone.central_basin.demo_wilds"])
+zone_tags = Array[StringName]([&"village", &"social", &"services"])
+weather_profile_id = &"weather_profile.central_basin"

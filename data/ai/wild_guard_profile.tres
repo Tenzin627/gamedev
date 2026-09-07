@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CreatureAIProfileDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/ai/creature_ai_profile_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"ai_profile.wild.guard"
+display_name = "Cautious Grazer"
+description = "A calm wild temperament that wanders often, watches strangers, and flees only when they come too close."
+tags = Array[StringName]([&"wild_ai", &"guard"])
+move_speed = 35.0
+notice_radius = 180.0
+personal_space_radius = 54.0
+flee_until_distance = 128.0
+curiosity_stop_distance = 92.0
+idle_weight = 2.2
+wander_weight = 2.8
+curiosity_weight = 0.9
+flee_weight = 4.2

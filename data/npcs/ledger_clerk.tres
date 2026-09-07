@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="NPCDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://data/npcs/npc_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/characters/npcs/mei.png" id="2_texture"]
+[resource]
+script = ExtResource("1")
+world_texture = ExtResource("2_texture")
+content_id = &"npc.central_basin.ledger_clerk"
+display_name = "Ledger Clerk"
+description = "A relentlessly polite representative of the Ledger who treats inherited debt as ordinary village weather."
+tags = Array[StringName]([&"central_basin", &"ledger", &"debt"])
+default_dialogue_id = &"dialogue.central_basin.ledger_clerk_demo"
+role = "Ledger Representative"
+portrait_key = &"portrait.ledger_clerk"

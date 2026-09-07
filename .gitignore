@@ -1,0 +1,38 @@
+# Godot generated/editor state
+.godot/
+.mono/
+
+# Export/build output
+build/
+exports/
+*.pck
+
+# Local logs and captures
+logs/
+screenshots/
+*.log
+
+# Python local cache
+__pycache__/
+*.py[cod]
+
+# IDE/editor state
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Temporary / backup artifacts
+*.tmp
+*.temp
+*.bak
+*.old
+*.orig
+*.rej
+
+# User saves/settings live under user:// and are not repository files.

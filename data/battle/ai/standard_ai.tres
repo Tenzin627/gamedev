@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BattleAIProfileDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/battle/ai/battle_ai_profile_definition.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+content_id = &"battle_ai.standard"
+display_name = "Standard Battle AI"
+switch_hp_threshold = 0.25
+advantage_weight = 1.25
+damage_weight = 1.0
+defense_weight = 0.45
+status_weight = 0.35
+allow_tactical_switch = true

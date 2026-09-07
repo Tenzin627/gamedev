@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CreatureEvolutionDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/creatures/creature_evolution_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"evolution.rillfin.teen_to_flashfin"
+display_name = "Flashfin branch"
+description = "Speed-leaning growth favors current-riding fins and fast combat identity."
+tags = Array[StringName]([&"creature_evolution"])
+source_species_id = &"creature.rillfin.teen"
+source_stage = "teen"
+result_species_id = &"creature.rillfin.adult.flashfin"
+result_stage = "adult"
+min_growth_xp = 90
+min_bond_level = 3
+required_tendency = "Speed"
+minimum_tendency = 6
+branch_label = "Flashfin branch"
+preview_note = "Speed-leaning growth favors current-riding fins and fast combat identity."

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="QuestDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://data/quests/quest_definition.gd" id="1"]
+[ext_resource type="Script" path="res://data/quests/quest_objective_definition.gd" id="2"]
+[sub_resource type="Resource" id="Objective"]
+script = ExtResource("2")
+objective_id = &"objective_1"
+kind = 1
+target_id = &""
+required_amount = 1
+description = "Describe the objective."
+[resource]
+script = ExtResource("1")
+content_id = &"template.quest"
+display_name = "New Quest"
+description = "Describe the quest."
+quest_category = "Side"
+objectives = Array[QuestObjectiveDefinition]([SubResource("Objective")])
+auto_complete = true

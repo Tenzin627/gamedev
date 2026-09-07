@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BattleEffectDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/battle/effects/battle_effect_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"battle_effect.status.weakened"
+display_name = "Apply Weakened"
+description = "Inflict Weakened for two turns."
+tags = Array[StringName]([&"battle_effect", &"status", &"debuff"])
+effect_type = "ApplyStatus"
+target_scope = "Opponent"
+status_id = &"battle_status.weakened"
+status_duration_turns = 2

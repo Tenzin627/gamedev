@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="LootTableDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://data/gathering/loot_table_definition.gd" id="1"]
+[ext_resource type="Script" path="res://data/gathering/resource_drop_entry.gd" id="2"]
+[sub_resource type="Resource" id="Drop"]
+script = ExtResource("2")
+item_id = &""
+min_amount = 1
+max_amount = 1
+[resource]
+script = ExtResource("1")
+content_id = &"template.loot"
+display_name = "New Loot Table"
+description = "Reusable gathering or reward drops."
+entries = Array[ResourceDropEntry]([SubResource("Drop")])

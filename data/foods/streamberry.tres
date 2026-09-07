@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CreatureFoodDefinition" load_steps=3 format=3]
+
+[ext_resource path="res://data/items/creature_food_definition.gd" type="Script" id="1"]
+
+[ext_resource type="Texture2D" path="res://art/items/food/streamberries.png" id="2_icon"]
+
+[resource]
+script = ExtResource("1")
+icon = ExtResource("2_icon")
+content_id = &"item.food.streamberry"
+display_name = "Streamberry"
+description = "A crisp river berry. Primary creature growth food with a strong Speed tendency."
+tags = Array[StringName]([&"food", &"creature_food", &"river"])
+category = "Food"
+max_stack = 20
+buy_value = 12
+sell_value = 4
+growth_xp = 18
+bond_growth = 1
+speed_tendency = 3
+unlock_move_ids = Array[StringName]([&"move.river_dash"])

@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://world/shared/farming/farm_plot_visual.gd" id="1_script"]
+[ext_resource type="TileSet" path="res://world/shared/farming/farm_tileset.tres" id="2_tileset"]
+
+[node name="FarmPlotVisual" type="Node2D"]
+z_index = -5
+script = ExtResource("1_script")
+
+[node name="FarmBuildArea" type="TileMapLayer" parent="."]
+z_index = -1
+modulate = Color(1, 1, 1, 0.42)
+tile_set = ExtResource("2_tileset")
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAEAAAAAAAAAAAACAAEAAAAAAAAAAAADAAEAAAAAAAAAAAAEAAEAAAAAAAAAAAAFAAEAAAAAAAAAAAAGAAEAAAAAAAAAAAAHAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAABAAIAAAAAAAAAAAACAAIAAAAAAAAAAAADAAIAAAAAAAAAAAAEAAIAAAAAAAAAAAAFAAIAAAAAAAAAAAAGAAIAAAAAAAAAAAAHAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAAHAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAABAAQAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAA=")
+
+[node name="StarterPlots" type="TileMapLayer" parent="."]
+z_index = 0
+tile_set = ExtResource("2_tileset")
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=")
+
+[node name="FarmOwnedPlots" type="TileMapLayer" parent="."]
+z_index = 0
+tile_set = ExtResource("2_tileset")
+
+[node name="FarmSoil" type="TileMapLayer" parent="."]
+z_index = 1
+tile_set = ExtResource("2_tileset")
+
+[node name="FarmCrops" type="TileMapLayer" parent="."]
+z_index = 2
+tile_set = ExtResource("2_tileset")

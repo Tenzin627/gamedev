@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="RecipeDefinition" load_steps=4 format=3]
+[ext_resource type="Script" path="res://data/recipes/recipe_definition.gd" id="1"]
+[ext_resource type="Script" path="res://data/recipes/recipe_ingredient.gd" id="2"]
+[sub_resource type="Resource" id="Ingredient1"]
+script = ExtResource("2")
+item_id = &"item.plant.moonroot"
+amount = 2
+[resource]
+script = ExtResource("1")
+content_id = &"recipe.crafting.trail_ration"
+display_name = "Trail Ration"
+description = "Bundle preserved Moonroot into a compact travel ration."
+recipe_category = "Crafting"
+station_tags = Array[StringName]([&"crafting"])
+ingredients = Array[RecipeIngredient]([SubResource("Ingredient1")])
+output_item_id = &"item.food.trail_ration"
+output_amount = 1
+discovered_by_default = true

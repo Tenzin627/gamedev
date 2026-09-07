@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CreatureAIProfileDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/ai/creature_ai_profile_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"ai_profile.wild.attack"
+display_name = "Bold Forager"
+description = "A confident wild temperament that is more likely to investigate than flee."
+tags = Array[StringName]([&"wild_ai", &"attack"])
+move_speed = 46.0
+notice_radius = 185.0
+personal_space_radius = 38.0
+flee_until_distance = 82.0
+curiosity_stop_distance = 70.0
+idle_weight = 1.0
+wander_weight = 2.5
+curiosity_weight = 4.0
+flee_weight = 1.6

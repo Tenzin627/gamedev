@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BuildingDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/building/building_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"template.building"
+display_name = "New Building"
+description = "Describe the building."
+footprint_tiles = Vector2i(1, 1)
+grid_snapped = true
+placement_tags = Array[StringName]([&"outdoor"])
+removable = true

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ProgressionMilestoneDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/progression/progression_milestone_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"progression.farmer.sproutkeeper"
+display_name = "Sproutkeeper"
+description = "A persistent farmer progression milestone earned by playing that part of Lung Sa."
+tags = Array[StringName]([&"progression", &"farmer"])
+track_id = &"farmer"
+rank = 1
+required_points = 25
+unlock_tags = Array[StringName]([&"progression.farm.basic"])
+reward_currency = 25

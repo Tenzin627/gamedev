@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="StoryChainDefinition" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://data/story/story_chain_definition.gd" id="1"]
+[ext_resource type="Script" path="res://data/story/story_step_definition.gd" id="2"]
+
+[sub_resource type="Resource" id="ReceiptStep"]
+script = ExtResource("2")
+quest_id = &"quest.central_basin.receipt_that_bites_back"
+locked_hint = "Go to Basin Village and speak with the Ledger Clerk about your first 500-coin collection."
+story_label_override = "First Collection"
+
+[resource]
+script = ExtResource("1")
+content_id = &"story_chain.central_basin.first_collection"
+display_name = "First Collection"
+description = "The fifteen-minute demo story: inherit debt, take one ridiculous local job, earn the money, and pay the Ledger."
+tags = Array[StringName]([&"central_basin", &"main_demo"])
+region_id = &"region.central_basin"
+steps = Array[StoryStepDefinition]([SubResource("ReceiptStep")])
+completion_world_flag = &"world.central_basin.first_collection_paid"
+completion_label = "First Collection Paid"
+post_quest_hint = "Earn 500 coins, then use the payment desk beside the Ledger Clerk in Basin Village."

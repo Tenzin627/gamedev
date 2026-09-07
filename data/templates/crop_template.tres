@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CropDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/farming/crop_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"template.crop"
+display_name = "New Crop"
+description = "Describe the crop."
+seed_item_id = &""
+harvest_item_id = &""
+growth_stages = 4
+watered_days_per_stage = 1
+harvest_min = 1
+harvest_max = 2
+requires_water = true

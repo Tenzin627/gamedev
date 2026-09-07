@@ -1,0 +1,108 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="Script" path="res://actors/creatures/wild_creature_actor.gd" id="1_actor"]
+[ext_resource type="Script" path="res://components/interaction/interactable_component.gd" id="2_interactable"]
+[ext_resource type="Script" path="res://components/ai/creature_perception_component.gd" id="3_perception"]
+[ext_resource type="Script" path="res://components/ai/creature_ai_controller.gd" id="4_controller"]
+[ext_resource type="Script" path="res://components/ai/behaviors/creature_idle_behavior.gd" id="5_idle"]
+[ext_resource type="Script" path="res://components/ai/behaviors/creature_wander_behavior.gd" id="6_wander"]
+[ext_resource type="Script" path="res://components/ai/behaviors/creature_curiosity_behavior.gd" id="7_curiosity"]
+[ext_resource type="Script" path="res://components/ai/behaviors/creature_flee_behavior.gd" id="8_flee"]
+[ext_resource type="Script" path="res://components/ai/behaviors/creature_return_habitat_behavior.gd" id="9_return"]
+[ext_resource type="Script" path="res://components/movement/actor_animation_component.gd" id="10_anim"]
+
+[sub_resource type="CircleShape2D" id="CircleShape_creature"]
+radius = 17.0
+[sub_resource type="CircleShape2D" id="CircleShape_interact"]
+radius = 32.0
+
+[node name="WildCreatureActor" type="CharacterBody2D"]
+y_sort_enabled = true
+collision_layer = 8
+collision_mask = 1
+script = ExtResource("1_actor")
+
+[node name="AnimatedVisual" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -20.5)
+scale = Vector2(0.265625, 0.2675)
+
+[node name="StaticVisual" type="Sprite2D" parent="."]
+position = Vector2(0, -20.5)
+scale = Vector2(0.265625, 0.2675)
+visible = false
+
+[node name="AnimationComponent" type="Node" parent="."]
+script = ExtResource("10_anim")
+animated_sprite_path = NodePath("../AnimatedVisual")
+idle_state = &"idle"
+walk_state = &"walk"
+initial_facing = &"s"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -14)
+shape = SubResource("CircleShape_creature")
+
+[node name="CreaturePerceptionComponent" type="Node" parent="."]
+script = ExtResource("3_perception")
+maximum_radius = 280.0
+refresh_interval = 0.15
+
+[node name="CreatureAIController" type="Node" parent="."]
+script = ExtResource("4_controller")
+perception_path = NodePath("../CreaturePerceptionComponent")
+behavior_container_path = NodePath("Behaviors")
+
+[node name="Behaviors" type="Node" parent="CreatureAIController"]
+
+[node name="ReturnHabitat" type="Node" parent="CreatureAIController/Behaviors"]
+script = ExtResource("9_return")
+behavior_id = &"behavior.return_habitat"
+behavior_priority = 100
+
+[node name="Flee" type="Node" parent="CreatureAIController/Behaviors"]
+script = ExtResource("8_flee")
+behavior_id = &"behavior.flee"
+behavior_priority = 0
+
+[node name="Curiosity" type="Node" parent="CreatureAIController/Behaviors"]
+script = ExtResource("7_curiosity")
+behavior_id = &"behavior.curiosity"
+behavior_priority = 0
+
+[node name="Wander" type="Node" parent="CreatureAIController/Behaviors"]
+script = ExtResource("6_wander")
+behavior_id = &"behavior.wander"
+behavior_priority = 0
+
+[node name="Idle" type="Node" parent="CreatureAIController/Behaviors"]
+script = ExtResource("5_idle")
+behavior_id = &"behavior.idle"
+behavior_priority = 0
+
+[node name="EncounterInteractable" type="Area2D" parent="."]
+position = Vector2(0, -16)
+collision_layer = 16
+collision_mask = 0
+monitoring = true
+monitorable = true
+script = ExtResource("2_interactable")
+action_name = &"interact"
+prompt_text = "Approach creature"
+interaction_priority = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EncounterInteractable"]
+shape = SubResource("CircleShape_interact")
+
+[node name="NameLabel" type="Label" parent="."]
+offset_left = -64.0
+offset_top = -62.0
+offset_right = 64.0
+offset_bottom = -40.0
+theme_override_colors/font_color = Color(0.9, 0.94, 0.9, 0.9)
+theme_override_colors/font_shadow_color = Color(0.05, 0.08, 0.06, 0.85)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 11
+text = "Wild Creature"
+horizontal_alignment = 1
+mouse_filter = 2

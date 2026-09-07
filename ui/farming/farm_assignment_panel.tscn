@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://ui/farming/farm_assignment_panel.gd" id="1"]
+[ext_resource type="Theme" path="res://ui/shared/lung_sa_theme.tres" id="2_theme"]
+[node name="FarmAssignmentPanel" type="CanvasLayer"]
+theme = ExtResource("2_theme")
+layer = 45
+script = ExtResource("1")
+[node name="Shade" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.025, 0.055, 0.045, 0.72)
+mouse_filter = 0
+[node name="Panel" type="PanelContainer" parent="."]
+visible = false
+offset_left = 300.0
+offset_top = 115.0
+offset_right = 980.0
+offset_bottom = 605.0
+custom_minimum_size = Vector2(680, 490)
+[node name="Margin" type="MarginContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+[node name="Content" type="VBoxContainer" parent="Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 11
+[node name="Kicker" type="Label" parent="Panel/Margin/Content"]
+layout_mode = 2
+text = "HOMESTEAD"
+[node name="Title" type="Label" parent="Panel/Margin/Content"]
+layout_mode = 2
+text = "Farm Crew"
+[node name="Status" type="Label" parent="Panel/Margin/Content"]
+layout_mode = 2
+autowrap_mode = 2
+text = "Assigned creatures and farm work status"
+[node name="Scroll" type="ScrollContainer" parent="Panel/Margin/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+[node name="CreatureList" type="VBoxContainer" parent="Panel/Margin/Content/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 7
+[node name="Hint" type="Label" parent="Panel/Margin/Content"]
+layout_mode = 2
+autowrap_mode = 2
+text = "Assign only. Creatures choose jobs automatically from their species profile, carry harvested goods to Homestead Storage, and rest when no useful work exists. Put seeds in the chest for auto-planting."
+[node name="CloseButton" type="Button" parent="Panel/Margin/Content"]
+layout_mode = 2
+text = "Close  [H / Esc]"

@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://world/shared/waymarks/waymark_point_2d.gd" id="1_waymark"]
+[ext_resource type="Script" path="res://components/interaction/interactable_component.gd" id="2_interactable"]
+[ext_resource type="Texture2D" path="res://art/world/props/waystone.png" id="3_visual"]
+
+[sub_resource type="RectangleShape2D" id="Rectangle_waymark"]
+size = Vector2(84, 92)
+
+[node name="WaymarkPoint2D" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_waymark")
+
+[node name="Visual" type="Sprite2D" parent="."]
+texture = ExtResource("3_visual")
+position = Vector2(0, -28)
+scale = Vector2(0.22, 0.22)
+
+
+[node name="Interactable" type="Area2D" parent="."]
+position = Vector2(0, -18)
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+monitorable = true
+script = ExtResource("2_interactable")
+action_name = &"activate_waymark"
+prompt_text = "Activate Waymark"
+interaction_priority = 35
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+shape = SubResource("Rectangle_waymark")

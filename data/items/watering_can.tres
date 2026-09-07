@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ToolDefinition" load_steps=3 format=3]
+[ext_resource path="res://data/items/tool_definition.gd" type="Script" id="1"]
+[ext_resource type="Texture2D" path="res://art/items/tools/watering_can.png" id="2_icon"]
+
+[resource]
+script = ExtResource("1")
+icon = ExtResource("2_icon")
+content_id = &"item.tool.watering_can"
+display_name = "Watering Can"
+description = "Waters one prepared farm cell."
+tags = Array[StringName]([&"tool", &"watering_can", &"farming"])
+category = "Tool"
+max_stack = 1
+buy_value = 120
+sell_value = 0
+tool_tag = &"watering_can"
+power = 1
+reach = 88.0
+use_cooldown_seconds = 0.18

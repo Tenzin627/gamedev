@@ -1,0 +1,62 @@
+[gd_resource type="TileSet" load_steps=17 format=3]
+[ext_resource type="Texture2D" path="res://art/terrain/tile_0.svg" id="t0"]
+[ext_resource type="Texture2D" path="res://art/terrain/tile_1.svg" id="t1"]
+[ext_resource type="Texture2D" path="res://art/terrain/tile_2.svg" id="t2"]
+[ext_resource type="Texture2D" path="res://art/terrain/tile_3.svg" id="t3"]
+[ext_resource type="Texture2D" path="res://art/terrain/tile_4.svg" id="t4"]
+[ext_resource type="Texture2D" path="res://art/terrain/tile_5.svg" id="t5"]
+[ext_resource type="Texture2D" path="res://art/terrain/tile_6.svg" id="t6"]
+[ext_resource type="Texture2D" path="res://art/terrain/tile_7.svg" id="t7"]
+
+[sub_resource type="TileSetAtlasSource" id="a0"]
+texture = ExtResource("t0")
+texture_region_size = Vector2i(64,64)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="a1"]
+texture = ExtResource("t1")
+texture_region_size = Vector2i(64,64)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="a2"]
+texture = ExtResource("t2")
+texture_region_size = Vector2i(64,64)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="a3"]
+texture = ExtResource("t3")
+texture_region_size = Vector2i(64,64)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="a4"]
+texture = ExtResource("t4")
+texture_region_size = Vector2i(64,64)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32,-32,32,-32,32,32,-32,32)
+
+[sub_resource type="TileSetAtlasSource" id="a5"]
+texture = ExtResource("t5")
+texture_region_size = Vector2i(64,64)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="a6"]
+texture = ExtResource("t6")
+texture_region_size = Vector2i(64,64)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="a7"]
+texture = ExtResource("t7")
+texture_region_size = Vector2i(64,64)
+0:0/0 = 0
+
+[resource]
+tile_size = Vector2i(64,64)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("a0")
+sources/1 = SubResource("a1")
+sources/2 = SubResource("a2")
+sources/3 = SubResource("a3")
+sources/4 = SubResource("a4")
+sources/5 = SubResource("a5")
+sources/6 = SubResource("a6")
+sources/7 = SubResource("a7")

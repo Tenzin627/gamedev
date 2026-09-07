@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CreatureAIProfileDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/ai/creature_ai_profile_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"ai_profile.wild.speed"
+display_name = "Skittish Dart"
+description = "An alert wild temperament that reacts early and flees quickly."
+tags = Array[StringName]([&"wild_ai", &"speed"])
+move_speed = 58.0
+notice_radius = 220.0
+personal_space_radius = 76.0
+flee_until_distance = 190.0
+curiosity_stop_distance = 110.0
+idle_weight = 0.8
+wander_weight = 2.9
+curiosity_weight = 0.2
+flee_weight = 7.0
+min_idle_seconds = 0.4
+max_idle_seconds = 1.2

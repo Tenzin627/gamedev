@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TraitDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/traits/trait_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"trait.speed.quickstep"
+display_name = "Quickstep"
+description = "A Speed archetype trait that rewards alert, mobile play."
+tags = Array[StringName]([&"speed", &"creature_trait"])
+archetype = "Speed"
+trigger = &"battle_start"
+effect_ids = Array[StringName]([&"battle_effect.priority.plus1_self"])

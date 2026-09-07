@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="NPCDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/npcs/npc_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"template.npc"
+display_name = "New NPC"
+description = "Describe the NPC."
+default_dialogue_id = &""
+role = "Resident"
+
+portrait_texture = null
+portrait_key = &""
+world_texture = null

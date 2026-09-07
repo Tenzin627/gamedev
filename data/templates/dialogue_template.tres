@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="DialogueDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://data/dialogue/dialogue_definition.gd" id="1"]
+[ext_resource type="Script" path="res://data/dialogue/dialogue_node.gd" id="2"]
+[sub_resource type="Resource" id="Start"]
+script = ExtResource("2")
+node_id = &"start"
+text = "Write dialogue here."
+[resource]
+script = ExtResource("1")
+content_id = &"template.dialogue"
+display_name = "New Dialogue"
+description = "Dialogue resource."
+start_node_id = &"start"
+nodes = Array[DialogueNode]([SubResource("Start")])

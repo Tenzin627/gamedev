@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://world/battle/battle_scene_controller.gd" id="1_controller"]
+[ext_resource type="PackedScene" path="res://ui/battle/battle_stage_creature_widget.tscn" id="2_creature"]
+[ext_resource type="PackedScene" path="res://ui/battle/battle_hud.tscn" id="3_hud"]
+[ext_resource type="Script" path="res://ui/battle/battle_backdrop.gd" id="4_backdrop"]
+
+[node name="BattleScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_controller")
+
+[node name="Backdrop" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4_backdrop")
+
+[node name="Stage" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="OpponentCreature" parent="Stage" instance=ExtResource("2_creature")]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 154.0
+offset_right = 484.0
+offset_bottom = 440.0
+
+[node name="PlayerCreature" parent="Stage" instance=ExtResource("2_creature")]
+layout_mode = 0
+offset_left = 760.0
+offset_top = 120.0
+offset_right = 1080.0
+offset_bottom = 406.0
+
+[node name="BattleHUD" parent="." instance=ExtResource("3_hud")]
+layout_mode = 1
+
+[node name="IntroFade" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.025, 0.047, 0.038, 1)

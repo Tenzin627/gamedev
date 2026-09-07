@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BondSpellDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/spells/bond_spell_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"spell.bond"
+display_name = "Bond"
+description = "A practical folklore spell used to invite a wild creature into companionship. One standard attempt is available per encounter; additional attempts cost normal game currency."
+tags = Array[StringName]([&"folklore_spell", &"bond"])
+retry_currency_cost = 25
+standard_attempts_per_encounter = 1
+max_paid_retries_per_encounter = 1

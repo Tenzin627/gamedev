@@ -1,0 +1,109 @@
+[gd_scene load_steps=17 format=3]
+
+[ext_resource type="Script" path="res://world/shared/state/stateful_world_object_2d.gd" id="1_root"]
+[ext_resource type="Script" path="res://world/shared/state/world_state_variant_visual_2d.gd" id="2_visual"]
+[ext_resource type="Script" path="res://components/interaction/interactable_component.gd" id="3_interactable"]
+[ext_resource type="Script" path="res://components/world_state/world_state_binding_component.gd" id="4_binding"]
+[ext_resource type="Script" path="res://components/world_state/world_state_visual_responder.gd" id="5_visual_response"]
+[ext_resource type="Script" path="res://components/world_state/world_state_collision_responder.gd" id="6_collision_response"]
+[ext_resource type="Script" path="res://components/world_state/world_state_interaction_responder.gd" id="7_interaction_response"]
+[ext_resource type="Script" path="res://components/world_state/world_state_navigation_responder.gd" id="8_navigation_response"]
+[ext_resource type="Script" path="res://components/world_state/world_state_setter_component.gd" id="9_setter"]
+[ext_resource type="Script" path="res://components/world_state/world_state_feedback_responder.gd" id="10_feedback"]
+[ext_resource type="Texture2D" path="res://art/world/props/bridge.png" id="11_bridge"]
+[ext_resource type="Texture2D" path="res://art/world/props/bridge_broken.png" id="12_broken_bridge"]
+[ext_resource type="Texture2D" path="res://art/world/props/rock.png" id="13_route_rock"]
+[ext_resource type="Texture2D" path="res://art/world/props/waystone.png" id="14_waystone"]
+
+[sub_resource type="RectangleShape2D" id="Rectangle_blocker"]
+size = Vector2(128, 58)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_interaction"]
+size = Vector2(160, 112)
+
+[node name="StatefulWorldObject2D" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_root")
+
+[node name="InactiveVisual" type="Sprite2D" parent="."]
+script = ExtResource("2_visual")
+bridge_active_texture = ExtResource("11_bridge")
+bridge_inactive_texture = ExtResource("12_broken_bridge")
+route_blocked_texture = ExtResource("13_route_rock")
+waymark_texture = ExtResource("14_waystone")
+
+[node name="ActiveVisual" type="Sprite2D" parent="."]
+visible = false
+script = ExtResource("2_visual")
+active_variant = true
+bridge_active_texture = ExtResource("11_bridge")
+bridge_inactive_texture = ExtResource("12_broken_bridge")
+route_blocked_texture = ExtResource("13_route_rock")
+waymark_texture = ExtResource("14_waystone")
+
+[node name="WorldBlocker" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBlocker"]
+shape = SubResource("Rectangle_blocker")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+avoidance_enabled = true
+radius = 62.0
+
+[node name="Interactable" type="Area2D" parent="."]
+position = Vector2(0, -4)
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+monitorable = true
+script = ExtResource("3_interactable")
+prompt_text = "Change world state"
+interaction_priority = 30
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+shape = SubResource("Rectangle_interaction")
+
+[node name="WorldStateBinding" type="Node" parent="."]
+script = ExtResource("4_binding")
+
+[node name="VisualResponder" type="Node" parent="."]
+script = ExtResource("5_visual_response")
+binding_path = NodePath("../WorldStateBinding")
+active_visual_path = NodePath("../ActiveVisual")
+inactive_visual_path = NodePath("../InactiveVisual")
+
+[node name="CollisionResponder" type="Node" parent="."]
+script = ExtResource("6_collision_response")
+binding_path = NodePath("../WorldStateBinding")
+collision_shape_paths = Array[NodePath]([NodePath("../WorldBlocker/CollisionShape2D")])
+collision_enabled_when_active = false
+collision_enabled_when_inactive = true
+
+[node name="InteractionResponder" type="Node" parent="."]
+script = ExtResource("7_interaction_response")
+binding_path = NodePath("../WorldStateBinding")
+interactable_path = NodePath("../Interactable")
+enabled_when_active = true
+enabled_when_inactive = true
+active_prompt_text = "Changed"
+inactive_prompt_text = "Change world state"
+
+[node name="NavigationResponder" type="Node" parent="."]
+script = ExtResource("8_navigation_response")
+binding_path = NodePath("../WorldStateBinding")
+obstacle_paths = Array[NodePath]([NodePath("../NavigationObstacle2D")])
+obstacle_enabled_when_active = false
+obstacle_enabled_when_inactive = true
+
+[node name="StateSetter" type="Node" parent="."]
+script = ExtResource("9_setter")
+binding_path = NodePath("../WorldStateBinding")
+interactable_path = NodePath("../Interactable")
+target_active = true
+
+[node name="FeedbackResponder" type="Node" parent="."]
+script = ExtResource("10_feedback")
+binding_path = NodePath("../WorldStateBinding")
+play_audio_on_change = true

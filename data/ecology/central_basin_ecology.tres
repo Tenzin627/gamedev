@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EcologyProfileDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/ecology/ecology_profile_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"ecology.central_basin"
+display_name = "Central Basin Ecology"
+description = "Foundation ecology profile for the Central Basin habitats and resource systems."
+tags = Array[StringName]([&"ecology", &"central_basin"])
+region_id = &"region.central_basin"
+habitat_ids = Array[StringName]([&"habitat.central_basin.meadow", &"habitat.central_basin.riverbank"])
+resource_tags = Array[StringName]([&"wood", &"stone", &"fiber", &"forage"])
+restoration_flags = Array[StringName]([])
+base_health = 1.0
+restoration_value_per_flag = 0.0

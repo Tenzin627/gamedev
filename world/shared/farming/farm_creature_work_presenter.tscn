@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://world/shared/farming/farm_creature_work_presenter.gd" id="1_presenter"]
+[ext_resource type="Script" path="res://components/movement/actor_animation_component.gd" id="2_anim"]
+
+[node name="FarmCreatureWorkPresenter" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_presenter")
+
+[node name="AnimatedVisual" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -20.5)
+scale = Vector2(0.265625, 0.2675)
+
+[node name="StaticVisual" type="Sprite2D" parent="."]
+position = Vector2(0, -20.5)
+scale = Vector2(0.265625, 0.2675)
+visible = false
+
+[node name="AnimationComponent" type="Node" parent="."]
+script = ExtResource("2_anim")
+animated_sprite_path = NodePath("../AnimatedVisual")
+idle_state = &"idle"
+walk_state = &"walk"
+initial_facing = &"s"

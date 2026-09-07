@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="BattleConsumableDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://data/items/battle_consumable_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/items/consumables/bandage.png" id="2_icon"]
+
+[resource]
+script = ExtResource("1")
+icon = ExtResource("2_icon")
+content_id = &"item.field_poultice"
+display_name = "Field Poultice"
+description = "A simple field dressing that restores 12 HP to one conscious party creature."
+tags = Array[StringName]([&"consumable", &"battle_item", &"recovery"])
+category = "Consumable"
+max_stack = 20
+buy_value = 24
+sell_value = 8
+battle_effect_ids = Array[StringName]([&"battle_effect.heal.12_ally"])
+target_mode = "AnyAlly"
+usable_in_battle = true

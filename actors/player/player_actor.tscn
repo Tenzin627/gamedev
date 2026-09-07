@@ -1,0 +1,110 @@
+[gd_scene load_steps=15 format=3]
+
+[ext_resource type="Script" path="res://actors/player/player_actor.gd" id="1_player"]
+[ext_resource type="Script" path="res://actors/player/player_sprite.gd" id="2_visual"]
+[ext_resource type="Script" path="res://components/movement/character_movement_component.gd" id="3_move"]
+[ext_resource type="Script" path="res://components/movement/actor_animation_component.gd" id="4_anim"]
+[ext_resource type="Script" path="res://components/interaction/interactor_component.gd" id="5_interactor"]
+[ext_resource type="Script" path="res://components/inventory/inventory_component.gd" id="6_inventory"]
+[ext_resource type="Script" path="res://components/inventory/hotbar_component.gd" id="7_hotbar"]
+[ext_resource type="Script" path="res://components/gathering/tool_use_component.gd" id="8_tool_use"]
+[ext_resource type="Script" path="res://systems/farming/farm_interaction_component.gd" id="9_farm"]
+
+[ext_resource type="Script" path="res://presentation/farm_cursor.gd" id="10_cursor"]
+[ext_resource type="Texture2D" path="res://art/characters/player/farmer_n.png" id="11_farmer_n"]
+[ext_resource type="Texture2D" path="res://art/characters/player/farmer_s.png" id="12_farmer_s"]
+[ext_resource type="Texture2D" path="res://art/characters/player/farmer_w.png" id="13_farmer_w"]
+[ext_resource type="Texture2D" path="res://art/characters/player/farmer_e.png" id="14_farmer_e"]
+
+[sub_resource type="CapsuleShape2D" id="Capsule_player"]
+radius = 14.0
+height = 28.0
+
+[sub_resource type="CircleShape2D" id="Circle_interactor"]
+radius = 44.0
+
+
+[node name="PlayerActor" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
+collision_mask = 13
+motion_mode = 1
+script = ExtResource("1_player")
+
+[node name="VisualRoot" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="VisualRoot"]
+
+[node name="FarmerSprite" type="Sprite2D" parent="VisualRoot"]
+position = Vector2(0, -43.5)
+scale = Vector2(0.3047, 0.3048)
+script = ExtResource("2_visual")
+texture_n = ExtResource("11_farmer_n")
+texture_s = ExtResource("12_farmer_s")
+texture_w = ExtResource("13_farmer_w")
+texture_e = ExtResource("14_farmer_e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -14)
+shape = SubResource("Capsule_player")
+
+[node name="MovementComponent" type="Node" parent="."]
+script = ExtResource("3_move")
+body_path = NodePath("..")
+max_speed = 220.0
+acceleration = 1800.0
+deceleration = 2200.0
+
+[node name="AnimationComponent" type="Node" parent="."]
+script = ExtResource("4_anim")
+animated_sprite_path = NodePath("../VisualRoot/AnimatedSprite2D")
+
+[node name="Interactor" type="Area2D" parent="."]
+position = Vector2(0, -18)
+collision_layer = 32
+collision_mask = 16
+monitoring = true
+monitorable = true
+script = ExtResource("5_interactor")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactor"]
+shape = SubResource("Circle_interactor")
+
+[node name="InventoryComponent" type="Node" parent="."]
+script = ExtResource("6_inventory")
+slot_capacity = 24
+
+[node name="HotbarComponent" type="Node" parent="."]
+script = ExtResource("7_hotbar")
+slot_count = 8
+
+[node name="ToolUseComponent" type="Node" parent="."]
+script = ExtResource("8_tool_use")
+actor_path = NodePath("..")
+hotbar_path = NodePath("../HotbarComponent")
+facing_source_path = NodePath("../AnimationComponent")
+target_collision_mask = 32
+minimum_facing_dot = 0.0
+max_query_results = 32
+
+[node name="Camera2D" type="Camera2D" parent="."]
+enabled = true
+position = Vector2(0, -48)
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+limit_left = -896
+limit_top = -576
+limit_right = 896
+limit_bottom = 832
+limit_smoothed = true
+
+[node name="FarmInteractionComponent" type="Node" parent="."]
+script = ExtResource("9_farm")
+actor_path = NodePath("..")
+inventory_path = NodePath("../InventoryComponent")
+hotbar_path = NodePath("../HotbarComponent")
+facing_source_path = NodePath("../AnimationComponent")
+reach = 72.0
+
+[node name="FarmCursor" type="Node2D" parent="."]
+script = ExtResource("10_cursor")

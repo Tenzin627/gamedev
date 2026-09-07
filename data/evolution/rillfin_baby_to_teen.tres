@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CreatureEvolutionDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/creatures/creature_evolution_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"evolution.rillfin.baby_to_teen"
+display_name = "Grow into Rillfin Skipper"
+description = "A stable teen form. All instance identity, Bond, traits and learned moves are preserved."
+tags = Array[StringName]([&"creature_evolution"])
+source_species_id = &"creature.rillfin.baby"
+source_stage = "baby"
+result_species_id = &"creature.rillfin.teen"
+result_stage = "teen"
+min_growth_xp = 40
+min_bond_level = 0
+required_tendency = "None"
+minimum_tendency = 0
+branch_label = "Grow into Rillfin Skipper"
+preview_note = "A stable teen form. All instance identity, Bond, traits and learned moves are preserved."

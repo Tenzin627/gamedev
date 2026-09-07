@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=3 format=3]
+[ext_resource path="res://data/items/item_definition.gd" type="Script" id="1"]
+[ext_resource type="Texture2D" path="res://art/items/plants/sunpod.svg" id="2_icon"]
+[resource]
+script = ExtResource("1")
+icon = ExtResource("2_icon")
+content_id = &"item.plant.sunpod"
+display_name = "Sunpod"
+description = "A quick-growing golden pod bred for the Basin home plots."
+tags = Array[StringName]([&"plant", &"crop", &"food_ingredient", &"central_basin"])
+category = "Food"
+max_stack = 99
+buy_value = 18
+sell_value = 10

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="LootTableDefinition" load_steps=4 format=3]
+[ext_resource type="Script" path="res://data/gathering/loot_table_definition.gd" id="1"]
+[ext_resource type="Script" path="res://data/gathering/resource_drop_entry.gd" id="2"]
+[sub_resource type="Resource" id="Wood"]
+script = ExtResource("2")
+item_id = &"item.material.basin_wood"
+min_amount = 2
+max_amount = 4
+[sub_resource type="Resource" id="Fiber"]
+script = ExtResource("2")
+item_id = &"item.material.plant_fiber"
+min_amount = 1
+max_amount = 2
+[resource]
+script = ExtResource("1")
+content_id = &"loot.central_basin.tree"
+display_name = "Basin Tree Drops"
+description = "Wood plus a little usable plant fiber from common Basin trees."
+tags = Array[StringName]([&"loot", &"central_basin", &"tree"])
+entries = Array[ResourceDropEntry]([SubResource("Wood"), SubResource("Fiber")])

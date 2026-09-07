@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=3 format=3]
+[ext_resource path="res://data/items/item_definition.gd" type="Script" id="1"]
+[ext_resource type="Texture2D" path="res://art/items/plants/wild_herb.svg" id="2_icon"]
+[resource]
+script = ExtResource("1")
+icon = ExtResource("2_icon")
+content_id = &"item.plant.wild_herb"
+display_name = "Wild Herb"
+description = "A fragrant Basin herb gathered from roadsides and shaded clearings."
+tags = Array[StringName]([&"plant", &"forage", &"food_ingredient", &"central_basin"])
+category = "Food"
+max_stack = 99
+buy_value = 12
+sell_value = 6

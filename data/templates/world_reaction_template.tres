@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="WorldReactionDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/world/world_reaction_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"template.world_reaction"
+display_name = "New World Reaction"
+description = "When all conditions are true, execute actions and optionally set a completion flag."
+tags = Array[StringName]([&"world_reaction"])
+region_id = &""
+conditions = Array[ContentCondition]([])
+actions = Array[ContentAction]([])
+completion_world_flag = &""
+reaction_event_id = &""

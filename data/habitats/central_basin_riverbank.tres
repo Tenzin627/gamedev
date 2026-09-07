@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="HabitatDefinition" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://data/habitats/habitat_definition.gd" id="1_habitat"]
+[ext_resource type="Script" path="res://data/habitats/habitat_spawn_entry.gd" id="2_entry"]
+
+[sub_resource type="Resource" id="SpawnEntry_rillfin"]
+script = ExtResource("2_entry")
+species_id = &"creature.rillfin.baby"
+spawn_weight = 3.0
+min_group_size = 1
+max_group_size = 2
+active_time_tags = Array[StringName]([&"dawn", &"day", &"dusk"])
+minimum_ecology_health = 0.25
+
+[sub_resource type="Resource" id="SpawnEntry_mossback"]
+script = ExtResource("2_entry")
+species_id = &"creature.mossback.baby"
+spawn_weight = 1.0
+min_group_size = 1
+max_group_size = 1
+active_time_tags = Array[StringName]([&"day", &"dusk", &"night"])
+minimum_ecology_health = 0.35
+
+[sub_resource type="Resource" id="SpawnEntry_brambleback"]
+script = ExtResource("2_entry")
+species_id = &"creature.brambleback.baby"
+spawn_weight = 2.5
+min_group_size = 1
+max_group_size = 1
+active_time_tags = Array[StringName]([&"dawn", &"day", &"dusk", &"night"])
+minimum_ecology_health = 0.25
+
+[resource]
+script = ExtResource("1_habitat")
+content_id = &"habitat.central_basin.riverbank"
+display_name = "Central Basin Riverbank"
+description = "Reed-lined river edge habitat used by small aquatic and bank-dwelling creatures."
+tags = Array[StringName]([&"habitat", &"central_basin", &"riverbank"])
+habitat_tags = Array[StringName]([&"river", &"riverbank"])
+required_region_tags = Array[StringName]([&"river"])
+spawn_entries = Array[ResourceDropEntry]([SubResource("SpawnEntry_rillfin"), SubResource("SpawnEntry_brambleback"), SubResource("SpawnEntry_mossback")])
+max_creatures_alive = 5
+initial_creatures = 3
+respawn_delay_seconds = 12.0
+minimum_player_distance = 120.0
+creature_spacing = 38.0

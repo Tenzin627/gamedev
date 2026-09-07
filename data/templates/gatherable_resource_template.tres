@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="GatherableResourceDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/gathering/gatherable_resource_definition.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+content_id = &"resource.template"
+display_name = "Gatherable Resource Template"
+description = "Define a common painted tree, rock, or other tool-gathered resource. Painted tiles bind directly through TileSet Custom Data: content_kind/content_id/tile_key."
+accepted_tool_tags = PackedStringArray("axe")
+minimum_tool_tier = 0
+durability = 3
+loot_table_id = &"loot.template"
+respawn_seconds = 0.0

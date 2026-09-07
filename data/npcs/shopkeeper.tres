@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="NPCDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://data/npcs/npc_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/characters/npcs/mei.png" id="2_texture"]
+[resource]
+script = ExtResource("1")
+world_texture = ExtResource("2_texture")
+content_id = &"npc.central_basin.shopkeeper"
+display_name = "Pao"
+description = "The village shopkeeper and enthusiastic inventor of financial products that should probably not be called products."
+tags = Array[StringName]([&"central_basin", &"shopkeeper", &"wager"])
+default_dialogue_id = &"dialogue.central_basin.pao_wager_demo"
+role = "Shopkeeper"
+portrait_key = &"portrait.shopkeeper"

@@ -1,0 +1,98 @@
+[gd_resource type="Resource" script_class="DialogueDefinition" load_steps=17 format=3]
+
+[ext_resource type="Script" path="res://data/dialogue/dialogue_definition.gd" id="1"]
+[ext_resource type="Script" path="res://data/dialogue/dialogue_node.gd" id="2"]
+[ext_resource type="Script" path="res://data/dialogue/dialogue_choice.gd" id="3"]
+[ext_resource type="Script" path="res://data/content/content_condition.gd" id="4"]
+[ext_resource type="Script" path="res://data/content/content_action.gd" id="5"]
+
+[sub_resource type="Resource" id="CondIntroNotDone"]
+script = ExtResource("4")
+kind = 1
+key = &"world.central_basin.ledger_intro_done"
+expected_value = "false"
+
+[sub_resource type="Resource" id="ActionIntroDone"]
+script = ExtResource("5")
+kind = 1
+key = &"world.central_basin.ledger_intro_done"
+value = "true"
+
+[sub_resource type="Resource" id="ActionAcceptMain"]
+script = ExtResource("5")
+kind = 2
+key = &"quest.central_basin.receipt_that_bites_back"
+
+[sub_resource type="Resource" id="ChoiceTakeWork"]
+script = ExtResource("3")
+text = "Fine. Where do I find 500 coins?"
+actions = Array[ContentAction]([SubResource("ActionIntroDone"), SubResource("ActionAcceptMain")])
+next_node_id = &"work"
+
+[sub_resource type="Resource" id="NodeStart"]
+script = ExtResource("2")
+node_id = &"start"
+text = "Congratulations. You won a farm. Unfortunately the previous owner also wagered the farm's Ledger account. Your first collection is 500 coins. The other 99,500 can ruin your week later."
+conditions = Array[ContentCondition]([SubResource("CondIntroNotDone")])
+choices = Array[DialogueChoice]([SubResource("ChoiceTakeWork")])
+
+[sub_resource type="Resource" id="NodeWork"]
+script = ExtResource("2")
+node_id = &"work"
+text = "Tavi has a paperwork emergency near the east road. Fix it, sell what you can, and return when the payment desk stops laughing at your wallet."
+
+[sub_resource type="Resource" id="CondPaid"]
+script = ExtResource("4")
+kind = 1
+key = &"world.central_basin.first_collection_paid"
+expected_value = "true"
+
+[sub_resource type="Resource" id="NodePaid"]
+script = ExtResource("2")
+node_id = &"paid"
+text = "The first collection is stamped PAID. Outstanding balance: 99,500. I would congratulate you, but congratulations are not deductible."
+conditions = Array[ContentCondition]([SubResource("CondPaid")])
+
+[sub_resource type="Resource" id="CondMainComplete"]
+script = ExtResource("4")
+kind = 2
+key = &"quest.central_basin.receipt_that_bites_back"
+expected_value = "completed"
+
+[sub_resource type="Resource" id="CondEnough"]
+script = ExtResource("4")
+kind = 5
+amount = 500
+comparison = 2
+
+[sub_resource type="Resource" id="NodeReady"]
+script = ExtResource("2")
+node_id = &"ready"
+text = "You actually have 500 coins. Use the payment desk beside me before either of us thinks too hard about how you got them."
+conditions = Array[ContentCondition]([SubResource("CondMainComplete"), SubResource("CondEnough")])
+
+[sub_resource type="Resource" id="CondMainActive"]
+script = ExtResource("4")
+kind = 2
+key = &"quest.central_basin.receipt_that_bites_back"
+expected_value = "active"
+
+[sub_resource type="Resource" id="NodeActive"]
+script = ExtResource("2")
+node_id = &"active"
+text = "Tavi's receipt problem pays unusually well because the Ledger is technically responsible for making it ridiculous. East road. Brambleback. Try not to lose more money bonding it."
+conditions = Array[ContentCondition]([SubResource("CondMainActive")])
+
+[sub_resource type="Resource" id="NodeShort"]
+script = ExtResource("2")
+node_id = &"short"
+text = "The payment desk accepts exactly 500 coins and exactly zero sob stories. Sell farm goods, take Pao's dubious wager, or find another way to close the gap."
+conditions = Array[ContentCondition]([SubResource("CondMainComplete")])
+
+[resource]
+script = ExtResource("1")
+content_id = &"dialogue.central_basin.ledger_clerk_demo"
+display_name = "Ledger Clerk — First Collection"
+description = "Introduces the inherited debt, starts the main demo quest, and directs the player toward repayment."
+start_node_id = &"start"
+nodes = Array[DialogueNode]([SubResource("NodeStart"), SubResource("NodePaid"), SubResource("NodeReady"), SubResource("NodeActive"), SubResource("NodeShort"), SubResource("NodeWork")])

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ResourceDistributionDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/ecology/resource_distribution_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"resource_distribution.central_basin.demo_wilds"
+display_name = "Demo Wilds Resource Ecology"
+description = "Renewable wood, stone, fiber and Wild Herb forage associated with the demo Wilds."
+tags = Array[StringName]([&"ecology", &"resource_distribution"])
+region_id = &"region.central_basin"
+zone_id = &"zone.central_basin.demo_wilds"
+resource_tags = Array[StringName]([&"wood", &"stone", &"fiber"])
+forage_tags = Array[StringName]([&"wild_herb", &"herb"])
+abundance = 1.0
+recovery_rate = 1.0

@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://ui/hud/debt_tracker_widget.gd" id="1"]
+
+[node name="DebtTrackerWidget" type="PanelContainer"]
+custom_minimum_size = Vector2(360, 112)
+script = ExtResource("1")
+mouse_filter = 2
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 8
+
+[node name="VBox" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Header" type="HBoxContainer" parent="Margin/VBox"]
+layout_mode = 2
+
+[node name="Kicker" type="Label" parent="Margin/VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "THE LEDGER  •  COLLECTION 01"
+
+[node name="Stamp" type="Label" parent="Margin/VBox/Header"]
+layout_mode = 2
+text = "OPEN"
+horizontal_alignment = 2
+
+[node name="Amount" type="Label" parent="Margin/VBox"]
+layout_mode = 2
+text = "500 DUE"
+
+[node name="FundsBar" type="ProgressBar" parent="Margin/VBox"]
+custom_minimum_size = Vector2(0, 9)
+layout_mode = 2
+max_value = 500.0
+show_percentage = false
+
+[node name="Meta" type="Label" parent="Margin/VBox"]
+layout_mode = 2
+text = "Wallet 40  •  Short 460"

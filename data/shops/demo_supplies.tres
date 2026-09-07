@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="ShopDefinition" load_steps=7 format=3]
+[ext_resource type="Script" path="res://data/shops/shop_definition.gd" id="1"]
+[ext_resource type="Script" path="res://data/shops/shop_stock_entry.gd" id="2"]
+[sub_resource type="Resource" id="Stock_moonroot_seed"]
+script = ExtResource("2")
+item_id = &"item.seed.moonroot"
+stock_limit = -1
+quantity_per_purchase = 1
+buy_price_multiplier = 1.0
+[sub_resource type="Resource" id="Stock_sunpod_seed"]
+script = ExtResource("2")
+item_id = &"item.seed.sunpod"
+stock_limit = -1
+quantity_per_purchase = 1
+buy_price_multiplier = 1.0
+[sub_resource type="Resource" id="Stock_ration"]
+script = ExtResource("2")
+item_id = &"item.food.trail_ration"
+stock_limit = 4
+quantity_per_purchase = 1
+buy_price_multiplier = 1.0
+[sub_resource type="Resource" id="Stock_stone"]
+script = ExtResource("2")
+item_id = &"item.material.river_stone"
+stock_limit = 8
+quantity_per_purchase = 2
+buy_price_multiplier = 1.0
+[resource]
+script = ExtResource("1")
+content_id = &"shop.central_basin.demo_supplies"
+display_name = "Basin Supplies"
+description = "A deliberately small Phase 3 shop: seeds, one travel consumable, and basic stone."
+tags = Array[StringName]([&"central_basin", &"general_goods", &"phase3"])
+shopkeeper_npc_id = &"npc.central_basin.shopkeeper"
+stock = Array[ShopStockEntry]([SubResource("Stock_moonroot_seed"), SubResource("Stock_sunpod_seed"), SubResource("Stock_ration"), SubResource("Stock_stone")])
+global_buy_multiplier = 1.0
+global_sell_multiplier = 1.0
+allow_selling = true

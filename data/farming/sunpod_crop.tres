@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CropDefinition" load_steps=2 format=3]
+[ext_resource path="res://data/farming/crop_definition.gd" type="Script" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"crop.sunpod"
+display_name = "Sunpod"
+description = "A quick demo crop: plant, water, rest once, then harvest."
+tags = Array[StringName]([&"crop", &"home_farm", &"demo_fast"])
+seed_item_id = &"item.seed.sunpod"
+harvest_item_id = &"item.plant.sunpod"
+growth_stages = 2
+watered_days_per_stage = 1
+harvest_min = 2
+harvest_max = 3
+regrow_watered_days = 0
+requires_water = true
+farm_stage_source_ids = Array[int]([7, 8])
+farm_ready_source_id = 8

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ZoneDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/regions/zone_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"template.zone"
+display_name = "New Zone"
+description = "Describe the zone."
+region_id = &""
+scene_path = ""
+default_spawn_id = &"default"
+zone_tags = Array[StringName]([])

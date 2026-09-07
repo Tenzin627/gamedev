@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="QuestDefinition" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://data/quests/quest_definition.gd" id="1"]
+[ext_resource type="Script" path="res://data/quests/quest_objective_definition.gd" id="2"]
+
+[sub_resource type="Resource" id="PlayBowl"]
+script = ExtResource("2")
+objective_id = &"play_lucky_bowl"
+kind = 12
+target_id = &"demo_wager_played"
+required_amount = 1
+description = "Try Pao's Lucky Bowl once. Winning is optional. Regret is included."
+
+[resource]
+script = ExtResource("1")
+content_id = &"quest.central_basin.lucky_bowl"
+display_name = "Pao's Sure Thing"
+description = "Pao needs evidence that his Lucky Bowl is a legitimate financial instrument. You need money. These facts should not have met."
+tags = Array[StringName]([&"central_basin", &"side", &"wager"])
+region_id = &"region.central_basin"
+quest_category = "Side"
+objectives = Array[QuestObjectiveDefinition]([SubResource("PlayBowl")])
+reward_currency = 10
+auto_complete = true

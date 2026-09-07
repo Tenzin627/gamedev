@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="NPCDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://data/npcs/npc_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/characters/npcs/mei.png" id="2_texture"]
+[resource]
+script = ExtResource("1")
+world_texture = ExtResource("2_texture")
+content_id = &"npc.central_basin.quest_resident"
+display_name = "Tavi"
+description = "A resident whose rent receipt has become evidence in an unexpectedly zoological paperwork dispute."
+tags = Array[StringName]([&"central_basin", &"quest_giver", &"resident"])
+default_dialogue_id = &"dialogue.central_basin.tavi_receipt_demo"
+role = "Resident / Quest Giver"
+portrait_key = &"portrait.quest_resident"

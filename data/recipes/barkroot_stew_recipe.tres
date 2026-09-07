@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="RecipeDefinition" load_steps=5 format=3]
+[ext_resource type="Script" path="res://data/recipes/recipe_definition.gd" id="1"]
+[ext_resource type="Script" path="res://data/recipes/recipe_ingredient.gd" id="2"]
+[sub_resource type="Resource" id="Ingredient1"]
+script = ExtResource("2")
+item_id = &"item.plant.moonroot"
+amount = 2
+[sub_resource type="Resource" id="Ingredient2"]
+script = ExtResource("2")
+item_id = &"item.material.basin_wood"
+amount = 1
+[resource]
+script = ExtResource("1")
+content_id = &"recipe.cooking.barkroot_stew"
+display_name = "Barkroot Stew"
+description = "Slow-cooked roots prepared as a Guard-leaning creature food."
+recipe_category = "Cooking"
+station_tags = Array[StringName]([&"cooking"])
+ingredients = Array[RecipeIngredient]([SubResource("Ingredient1"), SubResource("Ingredient2")])
+output_item_id = &"item.food.barkroot_stew"
+output_amount = 1
+discovered_by_default = true

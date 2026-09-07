@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="RegionDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/regions/region_definition.gd" id="1_region"]
+
+[resource]
+script = ExtResource("1_region")
+content_id = &"region.central_basin"
+display_name = "Central Basin"
+description = "The focused home region for the 15-minute demo: Home Farm, Basin Village, and the Basin Wilds."
+tags = Array[StringName]([&"region", &"home", &"basin"])
+scene_path = "res://world/central_basin/central_basin_region.tscn"
+default_spawn_id = &"default"
+default_zone_id = &"zone.central_basin.demo_farm"
+zone_ids = Array[StringName]([&"zone.central_basin.demo_farm", &"zone.central_basin.demo_village", &"zone.central_basin.demo_wilds"])
+neighbor_region_ids = Array[StringName]([])
+region_tags = Array[StringName]([&"temperate", &"grassland", &"river", &"farmland", &"home_region"])

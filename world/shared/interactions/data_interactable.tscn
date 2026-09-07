@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://world/shared/interactions/data_interactable.gd" id="1"]
+[ext_resource type="Script" path="res://components/interaction/interactable_component.gd" id="2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1"]
+radius = 36.0
+
+[node name="DataInteractable" type="Node2D"]
+script = ExtResource("1")
+
+[node name="Interactable" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+shape = SubResource("CircleShape2D_1")

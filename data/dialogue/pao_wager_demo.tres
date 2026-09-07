@@ -1,0 +1,68 @@
+[gd_resource type="Resource" script_class="DialogueDefinition" load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://data/dialogue/dialogue_definition.gd" id="1"]
+[ext_resource type="Script" path="res://data/dialogue/dialogue_node.gd" id="2"]
+[ext_resource type="Script" path="res://data/dialogue/dialogue_choice.gd" id="3"]
+[ext_resource type="Script" path="res://data/content/content_condition.gd" id="4"]
+[ext_resource type="Script" path="res://data/content/content_action.gd" id="5"]
+
+[sub_resource type="Resource" id="CondLocked"]
+script = ExtResource("4")
+kind = 2
+key = &"quest.central_basin.lucky_bowl"
+expected_value = "locked"
+
+[sub_resource type="Resource" id="ActionAccept"]
+script = ExtResource("5")
+kind = 2
+key = &"quest.central_basin.lucky_bowl"
+
+[sub_resource type="Resource" id="ChoiceAccept"]
+script = ExtResource("3")
+text = "One wager. What could go wrong?"
+actions = Array[ContentAction]([SubResource("ActionAccept")])
+next_node_id = &"accepted"
+
+[sub_resource type="Resource" id="NodeStart"]
+script = ExtResource("2")
+node_id = &"start"
+text = "You need Ledger money? Excellent. I need someone with questionable judgment to test my Lucky Bowl. Stake 20. Odds are fifty-five percent. A win pays 80. I pay 10 for the research either way. Even I believe in disclosing the bad decision."
+conditions = Array[ContentCondition]([SubResource("CondLocked")])
+choices = Array[DialogueChoice]([SubResource("ChoiceAccept")])
+
+[sub_resource type="Resource" id="NodeAccepted"]
+script = ExtResource("2")
+node_id = &"accepted"
+text = "The Lucky Bowl is beside the Ledger office. One toss only. This is for scientific integrity and absolutely not because the bowl jams after one use."
+
+[sub_resource type="Resource" id="CondActive"]
+script = ExtResource("4")
+kind = 2
+key = &"quest.central_basin.lucky_bowl"
+expected_value = "active"
+
+[sub_resource type="Resource" id="NodeActive"]
+script = ExtResource("2")
+node_id = &"active"
+text = "The bowl is waiting. Twenty coins in. Fifty-five percent chance. One throw. Luck, shame, or both come out."
+conditions = Array[ContentCondition]([SubResource("CondActive")])
+
+[sub_resource type="Resource" id="CondComplete"]
+script = ExtResource("4")
+kind = 2
+key = &"quest.central_basin.lucky_bowl"
+expected_value = "completed"
+
+[sub_resource type="Resource" id="NodeComplete"]
+script = ExtResource("2")
+node_id = &"complete"
+text = "Data collected! If you won, I designed it. If you lost, the market is volatile. The research stipend is ten coins. The odds were posted. My conscience is immaculate."
+conditions = Array[ContentCondition]([SubResource("CondComplete")])
+
+[resource]
+script = ExtResource("1")
+content_id = &"dialogue.central_basin.pao_wager_demo"
+display_name = "Pao — Lucky Bowl"
+description = "Optional one-shot wager side quest."
+start_node_id = &"start"
+nodes = Array[DialogueNode]([SubResource("NodeStart"), SubResource("NodeActive"), SubResource("NodeComplete"), SubResource("NodeAccepted")])

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CreatureSpeciesDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/creatures/creature_species_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"template.creature"
+display_name = "New Creature"
+description = "Describe the creature."
+archetype = "Attack"
+life_stage = "Baby"
+base_health = 10
+base_power = 5
+base_bond_chance = 0.55
+habitat_tags = Array[StringName]([&"meadow"])
+farm_work_profile_id = &""
+move_pool_ids = Array[StringName]([])
+trait_pool_ids = Array[StringName]([])
+ai_profile_id = &"ai_profile.wild.balanced"
+world_actor_scene_path = "res://actors/creatures/wild_creature_actor.tscn"

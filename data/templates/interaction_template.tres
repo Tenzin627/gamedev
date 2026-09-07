@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="InteractionDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://data/interactions/interaction_definition.gd" id="1"]
+[ext_resource type="Script" path="res://data/interactions/interaction_state_definition.gd" id="2"]
+[sub_resource type="Resource" id="DefaultState"]
+script = ExtResource("2")
+prompt_text = "Interact"
+feedback_text = "Interaction complete."
+quest_event_target_id = &""
+[resource]
+script = ExtResource("1")
+content_id = &"template.interaction"
+display_name = "New Interaction"
+description = "Data-driven world interaction."
+action_name = &"interact"
+states = Array[InteractionStateDefinition]([SubResource("DefaultState")])
+fallback_prompt = "Interact"
+fallback_feedback = "Nothing happens."

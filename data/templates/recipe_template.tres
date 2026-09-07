@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="RecipeDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://data/recipes/recipe_definition.gd" id="1"]
+[ext_resource type="Script" path="res://data/recipes/recipe_ingredient.gd" id="2"]
+[sub_resource type="Resource" id="Ingredient"]
+script = ExtResource("2")
+item_id = &""
+amount = 1
+[resource]
+script = ExtResource("1")
+content_id = &"template.recipe"
+display_name = "New Recipe"
+description = "Describe the recipe."
+recipe_category = "Crafting"
+station_tags = Array[StringName]([&"crafting"])
+ingredients = Array[Resource]([SubResource("Ingredient")])
+output_item_id = &""
+output_amount = 1
+discovered_by_default = true

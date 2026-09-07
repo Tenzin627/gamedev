@@ -1,0 +1,77 @@
+[gd_resource type="Resource" script_class="DialogueDefinition" load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://data/dialogue/dialogue_definition.gd" id="1"]
+[ext_resource type="Script" path="res://data/dialogue/dialogue_node.gd" id="2"]
+[ext_resource type="Script" path="res://data/content/content_condition.gd" id="3"]
+[ext_resource type="Script" path="res://data/content/content_action.gd" id="4"]
+
+[sub_resource type="Resource" id="CondActive"]
+script = ExtResource("3")
+kind = 2
+key = &"quest.central_basin.receipt_that_bites_back"
+expected_value = "active"
+
+[sub_resource type="Resource" id="CondOwnBramble"]
+script = ExtResource("3")
+kind = 6
+key = &"creature.brambleback.baby"
+amount = 1
+comparison = 2
+
+[sub_resource type="Resource" id="CondNoBramble"]
+script = ExtResource("3")
+kind = 6
+key = &"creature.brambleback.baby"
+amount = 1
+comparison = 2
+inverted = true
+
+[sub_resource type="Resource" id="ActionResolve"]
+script = ExtResource("4")
+kind = 5
+key = &"tavi_receipt_resolved"
+value = "1"
+
+[sub_resource type="Resource" id="NodeStart"]
+script = ExtResource("2")
+node_id = &"start"
+text = "You talked to the Ledger first? Bold. Most people prefer to discover debt naturally, like mold."
+conditions = Array[ContentCondition]([SubResource("CondActive"), SubResource("CondNoBramble")])
+next_node_id = &"explain"
+
+[sub_resource type="Resource" id="NodeExplain"]
+script = ExtResource("2")
+node_id = &"explain"
+text = "A Brambleback ate my rent receipt. The clerk says the creature counts as a legal witness if I present it in person. Bond one in the Wilds and bring it back. I wish I were joking; I already tried joking and got a late fee."
+
+[sub_resource type="Resource" id="NodeReturn"]
+script = ExtResource("2")
+node_id = &"return"
+text = "That's the receipt-eater! Wonderful. The Ledger can interrogate its stomach later. Here's 425 coins. Please spend at least 500 of them responsibly somehow."
+conditions = Array[ContentCondition]([SubResource("CondActive"), SubResource("CondOwnBramble")])
+actions = Array[ContentAction]([SubResource("ActionResolve")])
+
+[sub_resource type="Resource" id="CondComplete"]
+script = ExtResource("3")
+kind = 2
+key = &"quest.central_basin.receipt_that_bites_back"
+expected_value = "completed"
+
+[sub_resource type="Resource" id="NodeComplete"]
+script = ExtResource("2")
+node_id = &"complete"
+text = "My receipt is legally alive now. Don't ask. You should probably go pay the Ledger before your coins develop ambitions."
+conditions = Array[ContentCondition]([SubResource("CondComplete")])
+
+[sub_resource type="Resource" id="NodeLocked"]
+script = ExtResource("2")
+node_id = &"locked"
+text = "If the Ledger Clerk sent you, we can talk. If not, enjoy these precious final moments before paperwork finds you."
+
+[resource]
+script = ExtResource("1")
+content_id = &"dialogue.central_basin.tavi_receipt_demo"
+display_name = "Tavi — The Receipt That Bites Back"
+description = "Main demo quest dialogue before and after bonding Brambleback."
+start_node_id = &"start"
+nodes = Array[DialogueNode]([SubResource("NodeStart"), SubResource("NodeReturn"), SubResource("NodeComplete"), SubResource("NodeLocked"), SubResource("NodeExplain")])

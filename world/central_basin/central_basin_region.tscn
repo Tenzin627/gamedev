@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://world/shared/region_root.tscn" id="1_template"]
+[ext_resource type="Resource" path="res://data/regions/central_basin.tres" id="2_definition"]
+
+[node name="CentralBasinRegion" instance=ExtResource("1_template")]
+region_definition = ExtResource("2_definition")
+validate_on_ready = true

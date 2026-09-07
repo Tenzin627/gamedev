@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="GatherableResourceDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/gathering/gatherable_resource_definition.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+content_id = &"resource.central_basin.tree"
+display_name = "Basin Tree"
+description = "A common Basin tree. Painted on the ResourceTiles layer; axe behavior, durability and drops come from this Resource."
+tags = Array[StringName]([&"resource", &"tree", &"central_basin"])
+accepted_tool_tags = PackedStringArray("axe")
+minimum_tool_tier = 0
+durability = 3
+loot_table_id = &"loot.central_basin.tree"
+respawn_seconds = 18.0

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CreatureEvolutionDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/creatures/creature_evolution_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+content_id = &"evolution.mossback.teen_to_groveshell"
+display_name = "Groveshell branch"
+description = "Guard-leaning growth favors a broad sheltering shell and higher health."
+tags = Array[StringName]([&"creature_evolution"])
+source_species_id = &"creature.mossback.teen"
+source_stage = "teen"
+result_species_id = &"creature.mossback.adult.groveshell"
+result_stage = "adult"
+min_growth_xp = 90
+min_bond_level = 3
+required_tendency = "Guard"
+minimum_tendency = 6
+branch_label = "Groveshell branch"
+preview_note = "Guard-leaning growth favors a broad sheltering shell and higher health."

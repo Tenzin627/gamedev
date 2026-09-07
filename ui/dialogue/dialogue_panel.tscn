@@ -1,0 +1,118 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://ui/dialogue/dialogue_panel.gd" id="1"]
+[ext_resource type="Theme" path="res://ui/shared/lung_sa_theme.tres" id="2_theme"]
+
+[node name="DialoguePanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+theme = ExtResource("2_theme")
+script = ExtResource("1")
+
+[node name="BottomMargin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 34.0
+offset_top = -330.0
+offset_right = -34.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="DialogueRow" type="HBoxContainer" parent="BottomMargin"]
+layout_mode = 2
+theme_override_constants/separation = 18
+alignment = 2
+
+[node name="PortraitColumn" type="VBoxContainer" parent="BottomMargin/DialogueRow"]
+custom_minimum_size = Vector2(245, 0)
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 2
+
+[node name="PortraitFrame" type="PanelContainer" parent="BottomMargin/DialogueRow/PortraitColumn"]
+custom_minimum_size = Vector2(245, 248)
+layout_mode = 2
+
+[node name="PortraitMargin" type="MarginContainer" parent="BottomMargin/DialogueRow/PortraitColumn/PortraitFrame"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Portrait" type="TextureRect" parent="BottomMargin/DialogueRow/PortraitColumn/PortraitFrame/PortraitMargin"]
+custom_minimum_size = Vector2(220, 226)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+texture_filter = 1
+
+[node name="Role" type="Label" parent="BottomMargin/DialogueRow/PortraitColumn"]
+layout_mode = 2
+text = "LOCAL GUIDE"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="SpeechPanel" type="PanelContainer" parent="BottomMargin/DialogueRow"]
+custom_minimum_size = Vector2(0, 262)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Margin" type="MarginContainer" parent="BottomMargin/DialogueRow/SpeechPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 26
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 26
+theme_override_constants/margin_bottom = 20
+
+[node name="Column" type="VBoxContainer" parent="BottomMargin/DialogueRow/SpeechPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ConversationKicker" type="Label" parent="BottomMargin/DialogueRow/SpeechPanel/Margin/Column"]
+layout_mode = 2
+text = "CONVERSATION"
+
+[node name="Speaker" type="Label" parent="BottomMargin/DialogueRow/SpeechPanel/Margin/Column"]
+layout_mode = 2
+text = "Speaker"
+
+[node name="Divider" type="HSeparator" parent="BottomMargin/DialogueRow/SpeechPanel/Margin/Column"]
+layout_mode = 2
+
+[node name="Body" type="RichTextLabel" parent="BottomMargin/DialogueRow/SpeechPanel/Margin/Column"]
+custom_minimum_size = Vector2(0, 82)
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+fit_content = false
+scroll_active = false
+text = "Dialogue"
+
+[node name="Choices" type="VBoxContainer" parent="BottomMargin/DialogueRow/SpeechPanel/Margin/Column"]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="Footer" type="HBoxContainer" parent="BottomMargin/DialogueRow/SpeechPanel/Margin/Column"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 2
+
+[node name="Hint" type="Label" parent="BottomMargin/DialogueRow/SpeechPanel/Margin/Column/Footer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "[ESC] Close"
+vertical_alignment = 1
+
+[node name="Continue" type="Button" parent="BottomMargin/DialogueRow/SpeechPanel/Margin/Column/Footer"]
+custom_minimum_size = Vector2(190, 46)
+layout_mode = 2
+text = "Continue  [E]"

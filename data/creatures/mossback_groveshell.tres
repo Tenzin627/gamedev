@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="CreatureSpeciesDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://data/creatures/creature_species_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/creatures/mossback.png" id="2_texture"]
+[ext_resource type="SpriteFrames" path="res://data/creatures/overworld/mossback_overworld_frames.tres" id="3_frames"]
+[resource]
+script = ExtResource("1")
+world_texture = ExtResource("2_texture")
+world_sprite_frames = ExtResource("3_frames")
+content_id = &"creature.mossback.adult.groveshell"
+display_name = "Groveshell Mossback"
+description = "An adult Mossback shaped by patient growth; its living shell spreads into a broad sheltering canopy."
+tags = Array[StringName]([&"central_basin", &"evolution", &"adult", &"guard_branch"])
+archetype = "Guard"
+life_stage = "Adult"
+base_health = 31
+base_power = 6
+base_bond_chance = 0.62
+habitat_tags = Array[StringName]([&"meadow", &"riverbank"])
+farm_work_profile_id = &"farm_work.mossback"
+move_pool_ids = Array[StringName]([&"move.nudge", &"move.bark_brace", &"move.vine_snap"])
+trait_pool_ids = Array[StringName]([&"trait.guard.rooted", &"trait.guard.patient"])
+ai_profile_id = &"ai_profile.wild.guard"
