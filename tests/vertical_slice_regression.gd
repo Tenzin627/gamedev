@@ -15,6 +15,9 @@ func _ready() -> void:
     var farm: FarmPlotSystem = region.get_local_system(&"FarmPlotSystem")
     var farm_visual: FarmPlotVisual = region.get_node("Environment/HomeFarmPlots") as FarmPlotVisual
     var crop: CropDefinition = ContentDB.get_definition(&"crop.moonroot") as CropDefinition
+    # Isolate this regression from any runtime farm state restored while the scene binds.
+    # Starter ownership is rebuilt from designer-authored StarterPlots by the farm system.
+    farm.import_runtime_state({})
     var owned_cells: Array[Vector2i] = farm.get_owned_cells()
     check(not owned_cells.is_empty(),"Farm exposes at least one owned starter plot")
     if owned_cells.is_empty():
