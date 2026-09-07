@@ -1,0 +1,92 @@
+name: Godot CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: godot-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Static audit and Godot regressions
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up Godot 4.6.3
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.6.3
+          use-dotnet: false
+          include-templates: false
+
+      - name: Verify tool versions
+        run: |
+          python --version
+          godot --version
+
+      - name: Run Python contract tests and static audit
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          python tests/static_audit.py
+
+          mapfile -t python_tests < <(find tests -maxdepth 1 -type f -name '*_test.py' -print | sort)
+          if (( ${#python_tests[@]} == 0 )); then
+            echo "No Python contract tests found."
+            exit 1
+          fi
+
+          for test_file in "${python_tests[@]}"; do
+            echo "::group::${test_file}"
+            python "${test_file}"
+            echo "::endgroup::"
+          done
+
+      - name: Import Godot project headlessly
+        run: godot --headless --path . --import
+
+      - name: Smoke-test main scene load
+        shell: bash
+        run: timeout 60s godot --headless --path . --quit-after 2
+
+      - name: Run Godot regression scenes
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mapfile -t regression_scenes < <(
+            find tests -maxdepth 1 -type f \
+              \( -name '*_regression.tscn' -o -name 'inventory_transfer_test.tscn' \) \
+              -print | sort
+          )
+
+          if (( ${#regression_scenes[@]} == 0 )); then
+            echo "No Godot regression scenes found."
+            exit 1
+          fi
+
+          for scene in "${regression_scenes[@]}"; do
+            echo "::group::${scene}"
+            timeout 120s godot --headless --path . "${scene}"
+            echo "::endgroup::"
+          done
