@@ -29,6 +29,9 @@ func _ready() -> void:
         for failure: String in failures:
             push_error("PHASE 7 GAMBLING IDENTITY: %s" % failure)
 
+    await get_tree().create_timer(0.1).timeout
+    get_tree().quit(0 if failures.is_empty() else 1)
+
 func _expect(condition: bool, message: String, failures: Array[String]) -> void:
     if not condition:
         failures.append(message)
