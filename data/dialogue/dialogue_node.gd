@@ -2,6 +2,7 @@ extends Resource
 class_name DialogueNode
 
 @export var node_id: StringName = &""
+@export var entry_point: bool = true
 @export_group("Presentation")
 @export var speaker_npc_id: StringName = &""
 @export var speaker_override: String = ""

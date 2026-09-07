@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="DiscoveryDefinition" load_steps=2 format=3]
+[ext_resource path="res://data/exploration/discovery_definition.gd" type="Script" id="1"]
+
+[resource]
+script = ExtResource("1")
+content_id = &"discovery.central_basin.old_bell_crossing"
+display_name = "Old Bell Crossing"
+description = "Not all records are written. Some are repeated."
+tags = Array[StringName]([&"discovery", &"old_bell_crossing", &"bellkeeper", &"vertical_slice"])
+discovery_kind = "Landmark"
+region_id = &"region.central_basin"
+zone_id = &"zone.central_basin.demo_wilds"
+completion_weight = 1
+world_flag_on_discover = &"vs_old_bell_listened"

@@ -12,10 +12,10 @@ func get_node_definition(node_id: StringName) -> DialogueNode:
 
 func get_first_available_node() -> DialogueNode:
     var preferred: DialogueNode = get_node_definition(start_node_id)
-    if preferred != null and ContentConditionEvaluator.evaluate_all(preferred.conditions):
+    if preferred != null and preferred.entry_point and ContentConditionEvaluator.evaluate_all(preferred.conditions):
         return preferred
     for node_definition: DialogueNode in nodes:
-        if node_definition != null and ContentConditionEvaluator.evaluate_all(node_definition.conditions):
+        if node_definition != null and node_definition.entry_point and ContentConditionEvaluator.evaluate_all(node_definition.conditions):
             return node_definition
     return null
 

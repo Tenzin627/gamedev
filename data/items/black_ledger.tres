@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=2 format=3]
+[ext_resource path="res://data/items/item_definition.gd" type="Script" id="1"]
+
+[resource]
+script = ExtResource("1")
+content_id = &"item.key.black_ledger"
+display_name = "Black Ledger"
+description = "A black-bound ledger that is not supposed to know your name."
+tags = Array[StringName]([&"key_item", &"black_ledger", &"vertical_slice"])
+category = "Special"
+max_stack = 1
+buy_value = 0
+sell_value = 0

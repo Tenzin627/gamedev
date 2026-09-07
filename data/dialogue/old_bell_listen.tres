@@ -1,0 +1,57 @@
+[gd_resource type="Resource" script_class="DialogueDefinition" load_steps=8 format=3]
+[ext_resource type="Script" path="res://data/dialogue/dialogue_definition.gd" id="1_def"]
+[ext_resource type="Script" path="res://data/dialogue/dialogue_node.gd" id="2_node"]
+[ext_resource type="Script" path="res://data/content/content_action.gd" id="3_action"]
+
+[sub_resource type="Resource" id="DiscoverOldBell"]
+script = ExtResource("3_action")
+kind = 8
+key = &"discovery.central_basin.old_bell_crossing"
+
+[sub_resource type="Resource" id="Line1"]
+script = ExtResource("2_node")
+node_id = &"start"
+speaker_override = "NARRATION"
+role_override = "OLD BELL CROSSING"
+show_portrait = false
+text = "The bell moves before the wind reaches it."
+next_node_id = &"line_2"
+
+[sub_resource type="Resource" id="Line2"]
+script = ExtResource("2_node")
+node_id = &"line_2"
+entry_point = false
+speaker_override = "NARRATION"
+role_override = "OLD BELL CROSSING"
+show_portrait = false
+text = "You feel the note in the post, the bridge rail, and the dry channel under your boots."
+next_node_id = &"line_3"
+
+[sub_resource type="Resource" id="Line3"]
+script = ExtResource("2_node")
+node_id = &"line_3"
+entry_point = false
+speaker_override = "NARRATION"
+role_override = "OLD BELL CROSSING"
+show_portrait = false
+text = "Three shallow marks on the bell match the water markers along the trail."
+next_node_id = &"discovery"
+
+[sub_resource type="Resource" id="Discovery"]
+script = ExtResource("2_node")
+node_id = &"discovery"
+entry_point = false
+speaker_override = "DISCOVERY — OLD BELL CROSSING"
+role_override = "EXPLORER +1"
+show_portrait = false
+text = "Not all records are written. Some are repeated.\n\nExplorer progress +1 • Bellkeeper record unlocked"
+actions = Array[ContentAction]([SubResource("DiscoverOldBell")])
+
+[resource]
+script = ExtResource("1_def")
+content_id = &"dialogue.vertical_slice.old_bell_listen"
+display_name = "Old Bell Crossing — Listen"
+description = "Canonical Old Bell interaction narration and Discovery reveal."
+tags = Array[StringName]([&"dialogue", &"old_bell_crossing", &"mq01", &"discovery", &"vertical_slice", &"canonical"])
+start_node_id = &"start"
+nodes = Array[DialogueNode]([SubResource("Line1"), SubResource("Line2"), SubResource("Line3"), SubResource("Discovery")])

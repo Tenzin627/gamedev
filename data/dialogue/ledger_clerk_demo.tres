@@ -1,98 +1,161 @@
-[gd_resource type="Resource" script_class="DialogueDefinition" load_steps=17 format=3]
+[gd_resource type="Resource" script_class="DialogueDefinition" load_steps=35 format=3]
+[ext_resource type="Script" path="res://data/dialogue/dialogue_definition.gd" id="1_def"]
+[ext_resource type="Script" path="res://data/dialogue/dialogue_node.gd" id="2_node"]
+[ext_resource type="Script" path="res://data/dialogue/dialogue_choice.gd" id="3_choice"]
+[ext_resource type="Script" path="res://data/content/content_condition.gd" id="4_condition"]
+[ext_resource type="Script" path="res://data/content/content_action.gd" id="5_action"]
 
-[ext_resource type="Script" path="res://data/dialogue/dialogue_definition.gd" id="1"]
-[ext_resource type="Script" path="res://data/dialogue/dialogue_node.gd" id="2"]
-[ext_resource type="Script" path="res://data/dialogue/dialogue_choice.gd" id="3"]
-[ext_resource type="Script" path="res://data/content/content_condition.gd" id="4"]
-[ext_resource type="Script" path="res://data/content/content_action.gd" id="5"]
-
-[sub_resource type="Resource" id="CondIntroNotDone"]
-script = ExtResource("4")
+[sub_resource type="Resource" id="SprigbitAssigned"]
+script = ExtResource("4_condition")
 kind = 1
-key = &"world.central_basin.ledger_intro_done"
-expected_value = "false"
-
-[sub_resource type="Resource" id="ActionIntroDone"]
-script = ExtResource("5")
-kind = 1
-key = &"world.central_basin.ledger_intro_done"
-value = "true"
-
-[sub_resource type="Resource" id="ActionAcceptMain"]
-script = ExtResource("5")
-kind = 2
-key = &"quest.central_basin.receipt_that_bites_back"
-
-[sub_resource type="Resource" id="ChoiceTakeWork"]
-script = ExtResource("3")
-text = "Fine. Where do I find 500 coins?"
-actions = Array[ContentAction]([SubResource("ActionIntroDone"), SubResource("ActionAcceptMain")])
-next_node_id = &"work"
-
-[sub_resource type="Resource" id="NodeStart"]
-script = ExtResource("2")
-node_id = &"start"
-text = "Congratulations. You won a farm. Unfortunately the previous owner also wagered the farm's Ledger account. Your first collection is 500 coins. The other 99,500 can ruin your week later."
-conditions = Array[ContentCondition]([SubResource("CondIntroNotDone")])
-choices = Array[DialogueChoice]([SubResource("ChoiceTakeWork")])
-
-[sub_resource type="Resource" id="NodeWork"]
-script = ExtResource("2")
-node_id = &"work"
-text = "Tavi has a paperwork emergency near the east road. Fix it, sell what you can, and return when the payment desk stops laughing at your wallet."
-
-[sub_resource type="Resource" id="CondPaid"]
-script = ExtResource("4")
-kind = 1
-key = &"world.central_basin.first_collection_paid"
+key = &"vs_sprigbit_assigned"
 expected_value = "true"
 
-[sub_resource type="Resource" id="NodePaid"]
-script = ExtResource("2")
-node_id = &"paid"
-text = "The first collection is stamped PAID. Outstanding balance: 99,500. I would congratulate you, but congratulations are not deductible."
-conditions = Array[ContentCondition]([SubResource("CondPaid")])
+[sub_resource type="Resource" id="IruNotDone"]
+script = ExtResource("4_condition")
+kind = 1
+key = &"vs_iru_intro_done"
+expected_value = "false"
 
-[sub_resource type="Resource" id="CondMainComplete"]
-script = ExtResource("4")
-kind = 2
-key = &"quest.central_basin.receipt_that_bites_back"
-expected_value = "completed"
+[sub_resource type="Resource" id="IruDone"]
+script = ExtResource("4_condition")
+kind = 1
+key = &"vs_iru_intro_done"
+expected_value = "true"
 
-[sub_resource type="Resource" id="CondEnough"]
-script = ExtResource("4")
-kind = 5
-amount = 500
-comparison = 2
+[sub_resource type="Resource" id="FinishIru"]
+script = ExtResource("5_action")
+kind = 1
+key = &"vs_iru_intro_done"
+value = "true"
 
-[sub_resource type="Resource" id="NodeReady"]
-script = ExtResource("2")
-node_id = &"ready"
-text = "You actually have 500 coins. Use the payment desk beside me before either of us thinks too hard about how you got them."
-conditions = Array[ContentCondition]([SubResource("CondMainComplete"), SubResource("CondEnough")])
+[sub_resource type="Resource" id="ChoiceYes"]
+script = ExtResource("3_choice")
+text = "Yes."
+next_node_id = &"three_versions"
 
-[sub_resource type="Resource" id="CondMainActive"]
-script = ExtResource("4")
-kind = 2
-key = &"quest.central_basin.receipt_that_bites_back"
-expected_value = "active"
+[sub_resource type="Resource" id="ChoiceDepends"]
+script = ExtResource("3_choice")
+text = "Depends what this is about."
+next_node_id = &"three_versions"
 
-[sub_resource type="Resource" id="NodeActive"]
-script = ExtResource("2")
-node_id = &"active"
-text = "Tavi's receipt problem pays unusually well because the Ledger is technically responsible for making it ridiculous. East road. Brambleback. Try not to lose more money bonding it."
-conditions = Array[ContentCondition]([SubResource("CondMainActive")])
+[sub_resource type="Resource" id="ChoiceReturn"]
+script = ExtResource("3_choice")
+text = "Can I return it?"
+next_node_id = &"three_versions"
 
-[sub_resource type="Resource" id="NodeShort"]
-script = ExtResource("2")
-node_id = &"short"
-text = "The payment desk accepts exactly 500 coins and exactly zero sob stories. Sell farm goods, take Pao's dubious wager, or find another way to close the gap."
-conditions = Array[ContentCondition]([SubResource("CondMainComplete")])
+[sub_resource type="Resource" id="ChoiceNotReal"]
+script = ExtResource("3_choice")
+text = "That is not a real number."
+next_node_id = &"real_number"
+
+[sub_resource type="Resource" id="ChoiceWonFarm"]
+script = ExtResource("3_choice")
+text = "I won the farm."
+next_node_id = &"real_number"
+
+[sub_resource type="Resource" id="ChoiceTakeBack"]
+script = ExtResource("3_choice")
+text = "Take it back."
+next_node_id = &"real_number"
+
+[sub_resource type="Resource" id="ChoiceWithDeed"]
+script = ExtResource("3_choice")
+text = "It was with the deed."
+next_node_id = &"black_ledger"
+
+[sub_resource type="Resource" id="ChoiceValuable"]
+script = ExtResource("3_choice")
+text = "Is it valuable?"
+next_node_id = &"black_ledger"
+
+[sub_resource type="Resource" id="ChoiceConfiscate"]
+script = ExtResource("3_choice")
+text = "You look like you want to confiscate it."
+next_node_id = &"black_ledger"
+
+[sub_resource type="Resource" id="Start"]
+script = ExtResource("2_node")
+node_id = &"start"
+text = "Are you the registered winner of Lucky Acre? Please say no. I have walked very far."
+conditions = Array[ContentCondition]([SubResource("SprigbitAssigned"), SubResource("IruNotDone")])
+choices = Array[DialogueChoice]([SubResource("ChoiceYes"), SubResource("ChoiceDepends"), SubResource("ChoiceReturn")])
+
+[sub_resource type="Resource" id="ThreeVersions"]
+script = ExtResource("2_node")
+node_id = &"three_versions"
+entry_point = false
+text = "That is three versions of yes."
+next_node_id = &"debt_reveal"
+
+[sub_resource type="Resource" id="DebtReveal"]
+script = ExtResource("2_node")
+node_id = &"debt_reveal"
+entry_point = false
+text = "Lucky Acre carries an outstanding Accord valuation of 888,888 Marks."
+choices = Array[DialogueChoice]([SubResource("ChoiceNotReal"), SubResource("ChoiceWonFarm"), SubResource("ChoiceTakeBack")])
+
+[sub_resource type="Resource" id="RealNumber"]
+script = ExtResource("2_node")
+node_id = &"real_number"
+entry_point = false
+text = "It is unfortunately a very real number printed with excellent ink."
+next_node_id = &"mei_free"
+
+[sub_resource type="Resource" id="MeiFree"]
+script = ExtResource("2_node")
+node_id = &"mei_free"
+entry_point = false
+speaker_npc_id = &"npc.central_basin.mei"
+text = "You said the raffle was free."
+next_node_id = &"raffle_free"
+
+[sub_resource type="Resource" id="RaffleFree"]
+script = ExtResource("2_node")
+node_id = &"raffle_free"
+entry_point = false
+text = "The raffle was free. Ownership has been much more ambitious."
+next_node_id = &"payment_gate"
+
+[sub_resource type="Resource" id="PaymentGate"]
+script = ExtResource("2_node")
+node_id = &"payment_gate"
+entry_point = false
+text = "There is a first payment gate of 5,000 Marks. Farming, contracts, sales—anything lawful counts."
+next_node_id = &"where_ledger"
+
+[sub_resource type="Resource" id="WhereLedger"]
+script = ExtResource("2_node")
+node_id = &"where_ledger"
+entry_point = false
+text = "…Where did you get that?"
+choices = Array[DialogueChoice]([SubResource("ChoiceWithDeed"), SubResource("ChoiceValuable"), SubResource("ChoiceConfiscate")])
+
+[sub_resource type="Resource" id="BlackLedger"]
+script = ExtResource("2_node")
+node_id = &"black_ledger"
+entry_point = false
+text = "That is a Black Ledger. Those are not supposed to exist outside archival custody."
+next_node_id = &"knows_name"
+
+[sub_resource type="Resource" id="KnowsName"]
+script = ExtResource("2_node")
+node_id = &"knows_name"
+entry_point = false
+text = "More specifically, that one is not supposed to know your name."
+actions = Array[ContentAction]([SubResource("FinishIru")])
+
+[sub_resource type="Resource" id="PostConversation"]
+script = ExtResource("2_node")
+node_id = &"post_conversation"
+text = "I am going to report this accurately and with extremely selective adjectives."
+conditions = Array[ContentCondition]([SubResource("IruDone")])
 
 [resource]
-script = ExtResource("1")
+script = ExtResource("1_def")
 content_id = &"dialogue.central_basin.ledger_clerk_demo"
-display_name = "Ledger Clerk — First Collection"
-description = "Introduces the inherited debt, starts the main demo quest, and directs the player toward repayment."
+display_name = "Iru Vale — Debt & Black Ledger"
+description = "Canonical September 2026 debt notice and Black Ledger reveal."
+tags = Array[StringName]([&"dialogue", &"iru", &"mq00", &"black_ledger", &"vertical_slice", &"canonical"])
 start_node_id = &"start"
-nodes = Array[DialogueNode]([SubResource("NodeStart"), SubResource("NodePaid"), SubResource("NodeReady"), SubResource("NodeActive"), SubResource("NodeShort"), SubResource("NodeWork")])
+nodes = Array[DialogueNode]([SubResource("Start"), SubResource("ThreeVersions"), SubResource("DebtReveal"), SubResource("RealNumber"), SubResource("MeiFree"), SubResource("RaffleFree"), SubResource("PaymentGate"), SubResource("WhereLedger"), SubResource("BlackLedger"), SubResource("KnowsName"), SubResource("PostConversation")])

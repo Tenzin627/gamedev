@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="QuestDefinition" load_steps=9 format=3]
+[gd_resource type="Resource" script_class="QuestDefinition" load_steps=15 format=3]
 [ext_resource type="Script" path="res://data/quests/quest_definition.gd" id="1_quest"]
 [ext_resource type="Script" path="res://data/quests/quest_objective_definition.gd" id="2_objective"]
+[ext_resource type="Script" path="res://data/content/content_action.gd" id="3_action"]
 
 [sub_resource type="Resource" id="OpenLetter"]
 script = ExtResource("2_objective")
@@ -58,12 +59,40 @@ target_id = &"vs_iru_intro_done"
 required_amount = 1
 description = "Speak with the Accord Office clerk."
 
+[sub_resource type="Resource" id="ApplyComplianceCredit"]
+script = ExtResource("3_action")
+kind = 11
+amount = 500
+
+[sub_resource type="Resource" id="UnlockDebtLedger"]
+script = ExtResource("3_action")
+kind = 5
+key = &"ledger.ui_unlocked"
+value = "true"
+
+[sub_resource type="Resource" id="AwardLedgerCase"]
+script = ExtResource("3_action")
+kind = 5
+key = &"ledger.case"
+value = "1"
+
+[sub_resource type="Resource" id="AddBlackLedger"]
+script = ExtResource("3_action")
+kind = 9
+key = &"item.key.black_ledger"
+amount = 1
+
+[sub_resource type="Resource" id="AcceptMQ01"]
+script = ExtResource("3_action")
+kind = 2
+key = &"quest.mq01.the_bell_that_isnt_decorative"
+
 [resource]
 script = ExtResource("1_quest")
 content_id = &"quest.mq00.congratulations_you_owe_us"
 display_name = "Congratulations, You Owe Us"
 description = "You won Lucky Acre. Make it usable before anyone explains what you actually won."
-tags = Array[StringName]([&"quest", &"main", &"mq00", &"vertical_slice"])
+tags = Array[StringName]([&"quest", &"main", &"mq00", &"vertical_slice", &"canonical"])
 region_id = &"region.central_basin"
 quest_category = "Main"
 quest_chain_id = &""
@@ -71,5 +100,5 @@ chain_order = 0
 consequence_summary = "Ledger Case I • 500-Mark compliance credit • Debt Ledger unlocked"
 objectives = Array[QuestObjectiveDefinition]([SubResource("OpenLetter"), SubResource("TalkMei"), SubResource("ClearField"), SubResource("PrepareField"), SubResource("DealCreature"), SubResource("AssignSprigbit"), SubResource("SpeakClerk")])
 reward_currency = 0
-completion_actions = Array[ContentAction]([])
+completion_actions = Array[ContentAction]([SubResource("ApplyComplianceCredit"), SubResource("UnlockDebtLedger"), SubResource("AwardLedgerCase"), SubResource("AddBlackLedger"), SubResource("AcceptMQ01")])
 auto_complete = true

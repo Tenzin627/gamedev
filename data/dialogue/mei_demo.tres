@@ -1,17 +1,210 @@
-[gd_resource type="Resource" script_class="DialogueDefinition" load_steps=4 format=3]
+[gd_resource type="Resource" script_class="DialogueDefinition" load_steps=35 format=3]
+[ext_resource type="Script" path="res://data/dialogue/dialogue_definition.gd" id="1_def"]
+[ext_resource type="Script" path="res://data/dialogue/dialogue_node.gd" id="2_node"]
+[ext_resource type="Script" path="res://data/dialogue/dialogue_choice.gd" id="3_choice"]
+[ext_resource type="Script" path="res://data/content/content_condition.gd" id="4_condition"]
+[ext_resource type="Script" path="res://data/content/content_action.gd" id="5_action"]
 
-[ext_resource type="Script" path="res://data/dialogue/dialogue_definition.gd" id="1"]
-[ext_resource type="Script" path="res://data/dialogue/dialogue_node.gd" id="2"]
+[sub_resource type="Resource" id="LetterRead"]
+script = ExtResource("4_condition")
+kind = 1
+key = &"vs_letter_read"
+expected_value = "true"
 
-[sub_resource type="Resource" id="NodeStart"]
-script = ExtResource("2")
-node_id = &"start"
-text = "I heard you won the farm. Congratulations. I also heard the rest of the sentence. Sell what you grow, help Tavi, and remember: Pao's financial advice is only slightly more dangerous than the Ledger's."
+[sub_resource type="Resource" id="LetterUnread"]
+script = ExtResource("4_condition")
+kind = 1
+key = &"vs_letter_read"
+expected_value = "false"
+
+[sub_resource type="Resource" id="IntroDone"]
+script = ExtResource("4_condition")
+kind = 1
+key = &"vs_mei_intro_done"
+expected_value = "true"
+
+[sub_resource type="Resource" id="IntroNotDone"]
+script = ExtResource("4_condition")
+kind = 1
+key = &"vs_mei_intro_done"
+expected_value = "false"
+
+[sub_resource type="Resource" id="FieldPrepared"]
+script = ExtResource("4_condition")
+kind = 1
+key = &"vs_field_prepared"
+expected_value = "true"
+
+[sub_resource type="Resource" id="FieldNotPrepared"]
+script = ExtResource("4_condition")
+kind = 1
+key = &"vs_field_prepared"
+expected_value = "false"
+
+[sub_resource type="Resource" id="SprigbitCaptured"]
+script = ExtResource("4_condition")
+kind = 1
+key = &"vs_sprigbit_captured"
+expected_value = "true"
+
+[sub_resource type="Resource" id="SprigbitNotCaptured"]
+script = ExtResource("4_condition")
+kind = 1
+key = &"vs_sprigbit_captured"
+expected_value = "false"
+
+[sub_resource type="Resource" id="SprigbitAssigned"]
+script = ExtResource("4_condition")
+kind = 1
+key = &"vs_sprigbit_assigned"
+expected_value = "true"
+
+[sub_resource type="Resource" id="SprigbitNotAssigned"]
+script = ExtResource("4_condition")
+kind = 1
+key = &"vs_sprigbit_assigned"
+expected_value = "false"
+
+[sub_resource type="Resource" id="IruDone"]
+script = ExtResource("4_condition")
+kind = 1
+key = &"vs_iru_intro_done"
+expected_value = "true"
+
+[sub_resource type="Resource" id="IruNotDone"]
+script = ExtResource("4_condition")
+kind = 1
+key = &"vs_iru_intro_done"
+expected_value = "false"
+
+[sub_resource type="Resource" id="ActionIntroDone"]
+script = ExtResource("5_action")
+kind = 1
+key = &"vs_mei_intro_done"
+value = "true"
+
+[sub_resource type="Resource" id="ChoiceFarm"]
+script = ExtResource("3_choice")
+text = "I won a farm."
+next_node_id = &"intro_land"
+
+[sub_resource type="Resource" id="ChoiceWhat"]
+script = ExtResource("3_choice")
+text = "What did I actually win?"
+next_node_id = &"intro_land"
+
+[sub_resource type="Resource" id="ChoiceDeed"]
+script = ExtResource("3_choice")
+text = "[Say nothing. Hold up the deed.]"
+next_node_id = &"intro_land"
+
+[sub_resource type="Resource" id="IntroStart"]
+script = ExtResource("2_node")
+node_id = &"intro_start"
+text = "You’re the winner? I expected someone older. Or richer. Mostly richer."
+conditions = Array[ContentCondition]([SubResource("LetterRead"), SubResource("IntroNotDone")])
+choices = Array[DialogueChoice]([SubResource("ChoiceFarm"), SubResource("ChoiceWhat"), SubResource("ChoiceDeed")])
+
+[sub_resource type="Resource" id="IntroLand"]
+script = ExtResource("2_node")
+node_id = &"intro_land"
+entry_point = false
+text = "Technically? Land, a roof, three stubborn plots, and whatever is nesting under the shed."
+next_node_id = &"intro_practical"
+
+[sub_resource type="Resource" id="IntroPractical"]
+script = ExtResource("2_node")
+node_id = &"intro_practical"
+entry_point = false
+text = "Practically? Start with the field. If the soil accepts you, we’ll negotiate with the roof later."
+next_node_id = &"intro_tools"
+
+[sub_resource type="Resource" id="IntroTools"]
+script = ExtResource("2_node")
+node_id = &"intro_tools"
+entry_point = false
+text = "Tools are in your pack. Clear the little willow and that loose rock, then put those Bellbeans in the ground."
+actions = Array[ContentAction]([SubResource("ActionIntroDone")])
+
+[sub_resource type="Resource" id="BeforeLetter"]
+script = ExtResource("2_node")
+node_id = &"before_letter"
+text = "Open the letter first. I want to know whether to congratulate you or fetch a shovel."
+conditions = Array[ContentCondition]([SubResource("LetterUnread")])
+
+[sub_resource type="Resource" id="BeforePlanting"]
+script = ExtResource("2_node")
+node_id = &"before_planting"
+text = "Three beans. If we can keep three beans alive, we can discuss your agricultural empire."
+conditions = Array[ContentCondition]([SubResource("IntroDone"), SubResource("FieldNotPrepared")])
+
+[sub_resource type="Resource" id="ChoiceNeverSprigbit"]
+script = ExtResource("3_choice")
+text = "I have never battled a Sprigbit."
+next_node_id = &"sprigbit_reply"
+
+[sub_resource type="Resource" id="ChoiceNeverAnything"]
+script = ExtResource("3_choice")
+text = "I have never battled anything."
+next_node_id = &"sprigbit_reply"
+
+[sub_resource type="Resource" id="SprigbitStart"]
+script = ExtResource("2_node")
+node_id = &"sprigbit_start"
+text = "There. Your first customer."
+conditions = Array[ContentCondition]([SubResource("IntroDone"), SubResource("FieldPrepared"), SubResource("SprigbitNotCaptured")])
+next_node_id = &"sprigbit_borrow"
+
+[sub_resource type="Resource" id="SprigbitBorrow"]
+script = ExtResource("2_node")
+node_id = &"sprigbit_borrow"
+entry_point = false
+text = "That Sprigbit thinks the beans are a buffet. Borrow Brookfin. Don’t worry—he’s faster than he looks and exactly as smug."
+choices = Array[DialogueChoice]([SubResource("ChoiceNeverSprigbit"), SubResource("ChoiceNeverAnything")])
+
+[sub_resource type="Resource" id="SprigbitReply"]
+script = ExtResource("2_node")
+node_id = &"sprigbit_reply"
+entry_point = false
+text = "Perfect. Fewer bad habits."
+
+[sub_resource type="Resource" id="AssignmentStart"]
+script = ExtResource("2_node")
+node_id = &"assignment_start"
+text = "Now assign it to the farm."
+conditions = Array[ContentCondition]([SubResource("SprigbitCaptured"), SubResource("SprigbitNotAssigned")])
+next_node_id = &"assignment_rule"
+
+[sub_resource type="Resource" id="AssignmentRule"]
+script = ExtResource("2_node")
+node_id = &"assignment_rule"
+entry_point = false
+text = "Not to a job. To the farm. If the beans need water, it waters. If the field needs planting, it plants."
+next_node_id = &"assignment_speed"
+
+[sub_resource type="Resource" id="AssignmentSpeed"]
+script = ExtResource("2_node")
+node_id = &"assignment_speed"
+entry_point = false
+text = "It’ll be slower than you for now. That’s fine. You can’t be in two places unless the debt learns to split you."
+
+[sub_resource type="Resource" id="AfterAssignment"]
+script = ExtResource("2_node")
+node_id = &"after_assignment"
+text = "Don’t micromanage it. Give it work and let it decide what needs doing. Usually it’s right. Annoyingly."
+conditions = Array[ContentCondition]([SubResource("SprigbitAssigned"), SubResource("IruNotDone")])
+
+[sub_resource type="Resource" id="AfterIru"]
+script = ExtResource("2_node")
+node_id = &"after_iru"
+text = "Eight hundred eighty-eight thousand? I’m revising the congratulations."
+conditions = Array[ContentCondition]([SubResource("IruDone")])
 
 [resource]
-script = ExtResource("1")
+script = ExtResource("1_def")
 content_id = &"dialogue.central_basin.mei_demo"
-display_name = "Mei — Demo Guide"
-description = "Short guidance dialogue for the first collection demo."
-start_node_id = &"start"
-nodes = Array[DialogueNode]([SubResource("NodeStart")])
+display_name = "Mei Fen — Lucky Acre"
+description = "Canonical September 2026 Lucky Acre tutorial dialogue and state barks for Mei Fen."
+tags = Array[StringName]([&"dialogue", &"mei", &"mq00", &"vertical_slice", &"canonical"])
+start_node_id = &"intro_start"
+nodes = Array[DialogueNode]([SubResource("IntroStart"), SubResource("IntroLand"), SubResource("IntroPractical"), SubResource("IntroTools"), SubResource("BeforeLetter"), SubResource("BeforePlanting"), SubResource("SprigbitStart"), SubResource("SprigbitBorrow"), SubResource("SprigbitReply"), SubResource("AssignmentStart"), SubResource("AssignmentRule"), SubResource("AssignmentSpeed"), SubResource("AfterAssignment"), SubResource("AfterIru")])

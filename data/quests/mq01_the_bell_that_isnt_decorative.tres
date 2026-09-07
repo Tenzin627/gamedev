@@ -1,0 +1,68 @@
+[gd_resource type="Resource" script_class="QuestDefinition" load_steps=10 format=3]
+[ext_resource type="Script" path="res://data/quests/quest_definition.gd" id="1_quest"]
+[ext_resource type="Script" path="res://data/quests/quest_objective_definition.gd" id="2_objective"]
+[ext_resource type="Script" path="res://data/content/content_action.gd" id="3_action"]
+
+[sub_resource type="Resource" id="ClearThornfall"]
+script = ExtResource("2_objective")
+objective_id = &"clear_thornfall"
+kind = 1
+target_id = &"vs_thornfall_cleared"
+required_amount = 1
+description = "Clear the thornfall on the north trail."
+
+[sub_resource type="Resource" id="WaterMarkers"]
+script = ExtResource("2_objective")
+objective_id = &"follow_water_markers"
+kind = 12
+target_id = &"vs_water_markers_seen"
+required_amount = 2
+description = "Follow the water markers to Old Bell Crossing. 0/2"
+
+[sub_resource type="Resource" id="ListenBell"]
+script = ExtResource("2_objective")
+objective_id = &"listen_old_bell"
+kind = 1
+target_id = &"vs_old_bell_listened"
+required_amount = 1
+description = "Listen to the old bell."
+
+[sub_resource type="Resource" id="ReadLedgerEntry"]
+script = ExtResource("2_objective")
+objective_id = &"read_new_ledger_entry"
+kind = 1
+target_id = &"vs_mq01_complete"
+required_amount = 1
+description = "Read the new ledger entry."
+
+[sub_resource type="Resource" id="AwardSongbook"]
+script = ExtResource("3_action")
+kind = 9
+key = &"item.key.bellkeeper_songbook_page1"
+amount = 1
+
+[sub_resource type="Resource" id="RegisterDiscovery"]
+script = ExtResource("3_action")
+kind = 8
+key = &"discovery.central_basin.old_bell_crossing"
+
+[sub_resource type="Resource" id="AcceptMQ02"]
+script = ExtResource("3_action")
+kind = 2
+key = &"quest.mq02.a_payment_of_questionable_origin"
+
+[resource]
+script = ExtResource("1_quest")
+content_id = &"quest.mq01.the_bell_that_isnt_decorative"
+display_name = "The Bell That Isn’t Decorative"
+description = "The Black Ledger recognizes an old crossing the Office record treats as ordinary infrastructure. Go see what the bell remembers."
+tags = Array[StringName]([&"quest", &"main", &"mq01", &"vertical_slice", &"canonical"])
+region_id = &"region.central_basin"
+quest_category = "Main"
+quest_chain_id = &""
+chain_order = 1
+consequence_summary = "Bellkeeper Songbook — Page 1 • Discovery registered • MQ02 unlocked"
+objectives = Array[QuestObjectiveDefinition]([SubResource("ClearThornfall"), SubResource("WaterMarkers"), SubResource("ListenBell"), SubResource("ReadLedgerEntry")])
+reward_currency = 0
+completion_actions = Array[ContentAction]([SubResource("AwardSongbook"), SubResource("RegisterDiscovery"), SubResource("AcceptMQ02")])
+auto_complete = true

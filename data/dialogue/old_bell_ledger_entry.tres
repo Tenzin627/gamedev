@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="DialogueDefinition" load_steps=8 format=3]
+[ext_resource type="Script" path="res://data/dialogue/dialogue_definition.gd" id="1_def"]
+[ext_resource type="Script" path="res://data/dialogue/dialogue_node.gd" id="2_node"]
+[ext_resource type="Script" path="res://data/content/content_action.gd" id="3_action"]
+
+[sub_resource type="Resource" id="FinishMQ01"]
+script = ExtResource("3_action")
+kind = 1
+key = &"vs_mq01_complete"
+value = "true"
+
+[sub_resource type="Resource" id="Entry"]
+script = ExtResource("2_node")
+node_id = &"start"
+speaker_override = "BLACK LEDGER"
+role_override = "OLD BELL CROSSING"
+show_portrait = false
+text = "OLD BELL CROSSING\n\nRecorded: fields, road.\nObserved: fields, road, nests below.\nStatus: AGREEMENT INCOMPLETE.\nSource accepted: repeated bell practice / water marks / Bellkeeper song."
+next_node_id = &"iru_rejects"
+
+[sub_resource type="Resource" id="IruRejects"]
+script = ExtResource("2_node")
+node_id = &"iru_rejects"
+entry_point = false
+speaker_npc_id = &"npc.central_basin.ledger_clerk"
+text = "That cannot count as evidence."
+next_node_id = &"accepted"
+
+[sub_resource type="Resource" id="Accepted"]
+script = ExtResource("2_node")
+node_id = &"accepted"
+entry_point = false
+speaker_override = "LEDGER"
+role_override = "BLACK LEDGER"
+show_portrait = false
+text = "EVIDENCE ACCEPTED."
+next_node_id = &"iru_afraid"
+
+[sub_resource type="Resource" id="IruAfraid"]
+script = ExtResource("2_node")
+node_id = &"iru_afraid"
+entry_point = false
+speaker_npc_id = &"npc.central_basin.ledger_clerk"
+text = "I was afraid it would say that."
+actions = Array[ContentAction]([SubResource("FinishMQ01")])
+
+[resource]
+script = ExtResource("1_def")
+content_id = &"dialogue.vertical_slice.old_bell_ledger_entry"
+display_name = "Black Ledger — Old Bell Crossing"
+description = "Canonical MQ01 resolution: the Black Ledger accepts the Old Bell Crossing evidence."
+tags = Array[StringName]([&"dialogue", &"black_ledger", &"mq01", &"old_bell_crossing", &"vertical_slice", &"canonical"])
+start_node_id = &"start"
+nodes = Array[DialogueNode]([SubResource("Entry"), SubResource("IruRejects"), SubResource("Accepted"), SubResource("IruAfraid")])

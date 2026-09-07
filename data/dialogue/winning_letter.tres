@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="DialogueDefinition" load_steps=5 format=3]
+[ext_resource type="Script" path="res://data/dialogue/dialogue_definition.gd" id="1_def"]
+[ext_resource type="Script" path="res://data/dialogue/dialogue_node.gd" id="2_node"]
+[ext_resource type="Script" path="res://data/content/content_action.gd" id="3_action"]
+
+[sub_resource type="Resource" id="MarkRead"]
+script = ExtResource("3_action")
+kind = 1
+key = &"vs_letter_read"
+value = "true"
+
+[sub_resource type="Resource" id="Letter"]
+script = ExtResource("2_node")
+node_id = &"start"
+speaker_override = "WINNING LETTER"
+role_override = "OFFICIAL NOTICE"
+show_portrait = false
+text = "LUCKY ACRE COMMUNITY LAND RAFFLE — OFFICIAL NOTICE\n\nCongratulations! Ticket 071 has been selected. You are now the registered holder of Lucky Acre, including structures, fields, water rights, access obligations, maintenance obligations, historic obligations, inherited obligations, disputed obligations, and any obligations later determined to have always been obligations.\n\nPlease present yourself on site. Bring identification. A shovel is optional but statistically wise."
+actions = Array[ContentAction]([SubResource("MarkRead")])
+
+[resource]
+script = ExtResource("1_def")
+content_id = &"dialogue.vertical_slice.winning_letter"
+display_name = "Winning Letter"
+description = "Lucky Acre Community Land Raffle official notice."
+tags = Array[StringName]([&"dialogue", &"mq00", &"winning_letter", &"vertical_slice", &"canonical"])
+start_node_id = &"start"
+nodes = Array[DialogueNode]([SubResource("Letter")])

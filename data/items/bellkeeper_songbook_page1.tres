@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=2 format=3]
+[ext_resource path="res://data/items/item_definition.gd" type="Script" id="1"]
+
+[resource]
+script = ExtResource("1")
+content_id = &"item.key.bellkeeper_songbook_page1"
+display_name = "Bellkeeper Songbook — Page 1"
+description = "When the water climbs, ring once for the fields, twice for the road, three times for the nests below. If the road clerk complains, make him stand in the river."
+tags = Array[StringName]([&"key_item", &"record", &"bellkeeper", &"vertical_slice"])
+category = "Special"
+max_stack = 1
+buy_value = 0
+sell_value = 0

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="QuestDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://data/quests/quest_definition.gd" id="1_quest"]
+[ext_resource type="Script" path="res://data/quests/quest_objective_definition.gd" id="2_objective"]
+
+[sub_resource type="Resource" id="PaymentGate"]
+script = ExtResource("2_objective")
+objective_id = &"pay_payment_gate_i"
+kind = 12
+target_id = &"debt.payment_gate_progress"
+required_amount = 5000
+description = "Pay 5,000 Marks toward the debt. 500 / 5,000"
+
+[resource]
+script = ExtResource("1_quest")
+content_id = &"quest.mq02.a_payment_of_questionable_origin"
+display_name = "A Payment of Questionable Origin"
+description = "Payment Gate I is open. Earn 5,000 Marks any lawful way you can. The Ledger appears to have opinions about ‘lawful.’"
+tags = Array[StringName]([&"quest", &"main", &"mq02", &"vertical_slice", &"canonical"])
+region_id = &"region.central_basin"
+quest_category = "Main"
+quest_chain_id = &""
+chain_order = 2
+consequence_summary = "Farm, sell, complete work, or take optional wagers. No single route is required."
+objectives = Array[QuestObjectiveDefinition]([SubResource("PaymentGate")])
+reward_currency = 0
+completion_actions = Array[ContentAction]([])
+auto_complete = false
