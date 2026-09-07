@@ -282,48 +282,96 @@ func transfer_slot_to_first_available(from_index: int, target: ItemSlotContainer
             return transfer_slot_to(from_index, target, i)
     return false
 
+# Transfers min(amount, source quantity) only when the target can accept that full capped amount.
+# Returns false without mutating either container when total destination capacity is insufficient.
 func transfer_amount_to_first_available(from_index: int, target: ItemSlotContainerComponent, amount: int) -> bool:
     if target == null or amount <= 0 or not is_valid_slot(from_index):
         return false
     var source_stack: ItemStack = get_stack_copy(from_index)
     if source_stack == null or source_stack.is_empty():
         return false
+
+    var definition: ItemDefinition = _get_item_definition(source_stack.item_id)
+    if definition == null:
+        return false
+
+    var item_id: StringName = source_stack.item_id
+    var max_stack: int = maxi(definition.max_stack, 1)
     var move_amount: int = mini(amount, source_stack.quantity)
+    var available_capacity: int = 0
+
     for i: int in range(target.get_slot_count()):
-        var target_stack: ItemStack = target.get_stack_copy(i)
-        if target_stack == null or target_stack.item_id != source_stack.item_id:
+        if target == self and i == from_index:
             continue
-        var definition: ItemDefinition = _get_item_definition(source_stack.item_id)
-        var capacity: int = maxi(definition.max_stack, 1) - target_stack.quantity if definition != null else 0
+        var target_stack: ItemStack = target.get_stack_at(i)
+        if target_stack == null or target_stack.is_empty():
+            available_capacity += max_stack
+        elif target_stack.item_id == item_id:
+            available_capacity += maxi(max_stack - target_stack.quantity, 0)
+        if available_capacity >= move_amount:
+            break
+
+    if available_capacity < move_amount:
+        return false
+
+    var remaining: int = move_amount
+    var changed_target_indices: Array[int] = []
+    var transferred_amounts: Array[int] = []
+
+    for i: int in range(target.get_slot_count()):
+        if target == self and i == from_index:
+            continue
+        var target_stack: ItemStack = target.get_stack_copy(i)
+        if target_stack == null or target_stack.is_empty() or target_stack.item_id != item_id:
+            continue
+        var capacity: int = maxi(max_stack - target_stack.quantity, 0)
         if capacity <= 0:
             continue
-        var moved: int = mini(move_amount, capacity)
+        var moved: int = mini(remaining, capacity)
         target_stack.quantity += moved
         target._slots[i] = target_stack
-        source_stack.quantity -= moved
-        _slots[from_index] = source_stack if source_stack.quantity > 0 else null
-        _finish_amount_transfer(from_index, target, i, source_stack.item_id, moved)
-        return true
-    for i: int in range(target.get_slot_count()):
-        if target.get_stack_at(i) != null:
-            continue
-        target._slots[i] = ItemStack.new(source_stack.item_id, move_amount)
-        source_stack.quantity -= move_amount
-        _slots[from_index] = source_stack if source_stack.quantity > 0 else null
-        _finish_amount_transfer(from_index, target, i, source_stack.item_id, move_amount)
-        return true
-    return false
+        remaining -= moved
+        changed_target_indices.append(i)
+        transferred_amounts.append(moved)
+        if remaining <= 0:
+            break
 
-func _finish_amount_transfer(from_index: int, target: ItemSlotContainerComponent, to_index: int, item_id: StringName, amount: int) -> void:
+    if remaining > 0:
+        for i: int in range(target.get_slot_count()):
+            if target == self and i == from_index:
+                continue
+            var target_stack: ItemStack = target.get_stack_at(i)
+            if target_stack != null and not target_stack.is_empty():
+                continue
+            var moved: int = mini(remaining, max_stack)
+            target._slots[i] = ItemStack.new(item_id, moved)
+            remaining -= moved
+            changed_target_indices.append(i)
+            transferred_amounts.append(moved)
+            if remaining <= 0:
+                break
+
+    source_stack.quantity -= move_amount
+    _slots[from_index] = source_stack if source_stack.quantity > 0 else null
     _emit_slot_changed(from_index)
+
     if target == self:
-        _emit_slot_changed(to_index)
+        _emit_changed_indices(changed_target_indices)
         _emit_container_changed()
     else:
-        target._emit_slot_changed(to_index)
+        target._emit_changed_indices(changed_target_indices)
         _emit_container_changed()
         target._emit_container_changed()
-    items_transferred.emit(from_index, target, to_index, item_id, amount)
+
+    for transfer_index: int in range(changed_target_indices.size()):
+        items_transferred.emit(
+            from_index,
+            target,
+            changed_target_indices[transfer_index],
+            item_id,
+            transferred_amounts[transfer_index]
+        )
+    return true
 
 func export_slots() -> Array:
     var slots_data: Array = []
