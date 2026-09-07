@@ -17,8 +17,8 @@ func _ready() -> void:
     var crop: CropDefinition = ContentDB.get_definition(&"crop.moonroot") as CropDefinition
     var cell: Vector2i = Vector2i(1,1)
     check(farm_visual != null,"Farm presentation exists")
-    check(farm_visual.get_farm_layers().size()==3,"Farm uses three TileMapLayer nodes")
-    check(farm_visual.farm_ground.get_cell_source_id(cell)==FarmPlotVisual.SOURCE_UNTILLED,"Owned plot is an untilled tile")
+    check(farm_visual.get_farm_layers().size()==5,"Farm uses five authoring/runtime TileMapLayer nodes")
+    check(farm_visual.farm_owned_plots.get_cell_source_id(cell)==FarmPlotVisual.SOURCE_UNTILLED,"Owned plot is an untilled tile")
     check(farm_visual.get_children().all(func(child: Node) -> bool: return child is TileMapLayer),"Farm renderer contains only tile layers")
     check(not farm.plant(cell,crop),"Cannot plant untilled land")
     check(not farm.till(Vector2i(-1,0)),"Cannot till outside owned land")
@@ -26,7 +26,7 @@ func _ready() -> void:
     check(farm_visual.farm_soil.get_cell_source_id(cell)==FarmPlotVisual.SOURCE_TILLED,"Tilling updates FarmSoil layer")
     check(not farm.till(cell),"Duplicate till rejected")
     check(farm.plant(cell,crop),"Plant valid Moonroot")
-    check(farm_visual.farm_crops.get_cell_source_id(cell)==FarmPlotVisual.SOURCE_CROP_STAGE_0,"Planting creates crop-stage tile")
+    check(farm_visual.farm_crops.get_cell_source_id(cell)==crop.get_farm_tile_source(0,false),"Planting creates crop-stage tile")
     check(not farm.plant(cell,crop),"Occupied plot rejects seed")
     WorldTimeService.advance_minutes(1440)
     check(int(farm.get_plot(cell).get("stage",-1))==0,"Dry crop does not grow")
@@ -37,9 +37,9 @@ func _ready() -> void:
         WorldTimeService.advance_minutes(1440)
         check(not bool(farm.get_plot(cell).get("watered",true)),"Water clears each morning %d" % i)
         check(int(farm.get_plot(cell).get("stage",-1))==i+1,"Growth advances exactly once %d" % i)
-        check(farm_visual.farm_crops.get_cell_source_id(cell)==FarmPlotVisual.SOURCE_CROP_STAGE_0+i+1,"Growth updates FarmCrops tile %d" % i)
+        check(farm_visual.farm_crops.get_cell_source_id(cell)==crop.get_farm_tile_source(i+1,false),"Growth updates FarmCrops tile %d" % i)
     check(bool(farm.get_plot(cell).get("ready",false)),"Harvest ready after 3 watered nights")
-    check(farm_visual.farm_crops.get_cell_source_id(cell)==FarmPlotVisual.SOURCE_CROP_READY,"Ready crop uses harvest tile")
+    check(farm_visual.farm_crops.get_cell_source_id(cell)==crop.get_farm_tile_source(int(farm.get_plot(cell).get("stage",0)),true),"Ready crop uses harvest tile")
     var full_pack: InventoryComponent = InventoryComponent.new()
     full_pack.slot_capacity = 1
     full_pack.sync_with_game_session = false
