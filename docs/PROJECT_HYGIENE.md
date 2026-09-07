@@ -2,6 +2,13 @@
 
 This repository is the Phase 3 farm/resource/economy baseline for the 15-minute Lung Sa demo.
 
+## Engine version policy
+
+- Supported editor/runtime version: **Godot 4.6.3**.
+- `project.godot` declares `config/features=PackedStringArray("4.6")`; that records the 4.6 feature family, while CI pins the exact supported patch version to 4.6.3.
+- Use Godot 4.6.3 for normal editor work, local play-tests, release verification, and CI parity.
+- Do not open/save the project in an older or newer Godot version as part of normal development. Treat any engine upgrade as an intentional project-wide change: update `project.godot` as needed, README instructions, developer/release docs, and CI together.
+
 ## Keep
 
 - Godot `.uid` sidecars for scripts/shaders.
@@ -28,8 +35,9 @@ This repository is the Phase 3 farm/resource/economy baseline for the 15-minute 
 
 ## Before handoff
 
-1. Run `python3 tests/static_audit.py`.
-2. Run the Godot regression scenes listed in `docs/RELEASE_CHECKLIST.md`.
-3. Complete `docs/PLAYTEST.md` in both directions.
-4. Search for broken `res://` references, duplicate content IDs, and retired zone IDs.
-5. Confirm no `.godot/`, builds, logs, backups, or temporary files are inside the archive.
+1. Confirm Godot 4.6.3 is being used.
+2. Run `python3 tests/static_audit.py`.
+3. Run the Godot regression scenes listed in `docs/RELEASE_CHECKLIST.md`.
+4. Complete `docs/PLAYTEST.md` in both directions.
+5. Search for broken `res://` references, duplicate content IDs, and retired zone IDs.
+6. Confirm no `.godot/`, builds, logs, backups, or temporary files are inside the archive.
