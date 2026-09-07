@@ -12,8 +12,12 @@ Current playable loop:
 
 Phase 8 keeps that complete loop intact and unifies the presentation through one global theme and one shared UI style contract. Character conversations now use a large portrait + speech-panel layout inspired by the readability of Clash of Clans-style character dialogue, while retaining Lung Sa's jade/ink/ledger identity. **No audio or VFX are added in Phase 8.**
 
+## Engine version
+
+Lung Sa is supported on **Godot 4.6.3**. `project.godot` declares the Godot 4.6 feature set, while CI pins the exact supported patch version to 4.6.3. Use Godot 4.6.3 for editor work, local play-tests, and release verification unless the project version policy is intentionally updated everywhere together.
+
 ## Start
-Open `project.godot` in Godot 4.5.x and run the project. Main scene: `world/central_basin/zones/demo_farm.tscn`.
+Open `project.godot` in Godot 4.6.3 and run the project. Main scene: `world/central_basin/zones/demo_farm.tscn`.
 
 ## Controls
 - WASD / arrows — Move
